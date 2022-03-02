@@ -1,0 +1,42 @@
+@media screen and (min-width: 1024px) {
+  .layout {
+    width: 900px;
+    gap: 32px;
+  }
+
+  footer {
+    padding: 72px 0px;
+  }
+
+  footer > div.flex {
+    width: 900px;
+  }
+
+  header {
+    margin-top: 68px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .layout {
+    width: 100%;
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  footer {
+    padding: 0;
+  }
+
+  footer > div.flex {
+    width: 100%;
+  }
+
+  header {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

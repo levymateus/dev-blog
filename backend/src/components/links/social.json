@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_links_socials",
+  "info": {
+    "displayName": "social",
+    "icon": "at",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true,
+      "default": "#"
+    },
+    "label": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "GithubFilled",
+        "LinkedinFilled"
+      ]
+    }
+  }
+}

@@ -1,0 +1,142 @@
+@use "./variables.scss" as v;
+
+.moment {
+  font-size: 14px;
+  color: v.$blue60;
+  margin: 0;
+  padding: 0;
+  &:hover {
+    cursor: default;
+  }
+}
+
+button {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+button[data-variant="secondary"] {
+  color: v.$text10;
+  background-color: transparent;
+  &:focus {
+    border: 2px solid rgba($color: v.$blue60, $alpha: 0.41);
+  }
+  &:active {
+    border: 2px solid rgba($color: v.$blue60, $alpha: 0.41);
+  }
+  &:focus-visible {
+    border: 2px solid rgba($color: v.$blue60, $alpha: 0.41);
+  }
+}
+
+button[data-variant="secondary"]:hover {
+  color: v.$glow10;
+  cursor: pointer;
+  background-color: v.$blue30;
+  border: 2px solid rgba($color: v.$blue60, $alpha: 0.41);
+}
+
+button[data-active="true"] {
+  color: v.$text10;
+  border: 2px solid rgba($color: v.$blue60, $alpha: 0.41);
+}
+
+button[data-active="false"] {
+  border: 2px solid transparent;
+}
+
+span {
+  color: v.$blue60;
+}
+
+.card {
+  border-radius: 8px;
+  border: none;
+  background-color: v.$blue20;
+  box-sizing: border-box;
+  --color-blue: blue;
+  --color-green: green;
+  --color-purple: purple;
+  h1, h2, h3, h4 {
+    text-transform: capitalize;
+    margin: 0px;
+  }
+  p {
+    text-transform: none;
+    margin-top: 12px;
+    margin-bottom: 62px;
+  }
+}
+
+.card[data-color="blue"] {
+  border-left: 8px solid var(--color-blue, v.$blue);
+}
+
+.card[data-color="green"] {
+  border-left: 8px solid var(--color-green, v.$green);
+}
+
+.card[data-color="purple"] {
+  border-left: 8px solid var(--color-purple, v.$purple);
+}
+
+.contact {
+  h1, h2, h3, h4, h5, h6 {
+    color: v.$glow20;
+  }
+  p {
+    margin-top: 42px;
+  }
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.pos-left-32 {
+  left: 32px;
+}
+
+.pos-top-0 {
+  top: 0;
+}
+
+.articles {
+  grid-area: main;
+  ul {
+    margin-bottom: 92px;
+    li + li {
+      margin-top: 92px;
+    }
+  }
+}
+
+.markdown {
+  max-width: 900px;
+  img {
+    max-width: 900px;
+  }
+  p {
+    margin: 32px 0px;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol, ul {
+    padding: 0 32px;
+    margin: 32px 0;
+    li + li {
+      margin: 8px 0;
+    }
+  }
+  pre {
+    margin: 32px 0;
+  }
+}

@@ -1,0 +1,288 @@
+@use "./variables.scss" as v;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: v.$blue10;
+  color: v.$text10;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-size: 100%;
+  text-align: left;
+}
+
+body > div {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+}
+
+a {
+  color: v.$blue60;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+a[role="link"] {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+a[role="button"], a[role="icon"] {
+  color: v.$text10;
+  font-weight: normal;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2 {
+  margin-bottom: 64px;
+  margin-top: 64px;
+  color: v.$text10;
+}
+
+h3, h4, h5, h6 {
+  color: v.$text20;
+}
+
+h3, h4 {
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+h5 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+h6 {
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+
+.font-1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.font-2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.font-3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.font-4 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.font-5 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.font-6 {
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.cursor-pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap-center {
+  justify-content: center;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-align-between {
+  justify-content: space-between;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr 0.4fr;
+  height: 100%;
+  margin: auto;
+  align-items: start;
+  justify-content: center;
+  grid-template-areas: "header" "main" "footer";
+}
+
+header {
+  grid-area: header;
+  width: 100%;
+  gap: 24px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  nav {
+    ul {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 24px;
+    margin: 0;
+  }
+}
+
+footer {
+  grid-area: footer;
+  margin: auto;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  background-color: v.$blue10;
+
+  & > div.flex {
+    width: 900px;
+    margin: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  p {
+    font-size: 16px;
+    display: flex;
+    width: 100%;
+    line-height: 24px;
+  }
+
+  .media {
+    a {
+      font-size: 24px;
+    }
+    a + a {
+      margin-left: 24px;
+    }
+  }
+}
+
+// spacing 4px 8px 16px 32px 64px
+.mr-8 {
+  margin-left: 8px;
+}
+
+.ml-8 {
+  margin-right: 8px;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mr-16 {
+  margin-left: 16px;
+}
+
+.ml-16 {
+  margin-right: 16px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mt-64 {
+  margin-top: 64px;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+.p-32 {
+  padding: 32px;
+}
+
+.pl-8 {
+  padding-left: 8px;
+}
+
+.m-none {
+  margin: 0;
+}
+
+@import './components.scss';
+@import './media.scss';
