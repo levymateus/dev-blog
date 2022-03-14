@@ -7,7 +7,7 @@ const HomePage = ({ contact, articles }) => {
   return (
     <main>
       <Contact contact={contact} />
-      <Show when={articles.data.length}>
+      <Show when={articles.data?.length}>
         <LatestArticles articles={articles} />
       </Show>
     </main>

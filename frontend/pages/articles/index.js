@@ -29,7 +29,7 @@ function Articles({ articles, meta }) {
       <p>No articles published.</p>
     </Show>
     <ArticlesPage articles={articlesSlice} />
-    <Show when={hasData && greatherThanPageSize}>
+    <Show when={hasData && greatherThanPageSize && meta}>
       <Pagination
         page={page}
         meta={meta}
@@ -50,8 +50,12 @@ export async function getStaticProps() {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      articles: data,
-      meta,
+      articles: data || [],
+      meta: meta || {
+        pagination: {
+          pageSize: 1,
+        }
+      },
     },
   }
 }

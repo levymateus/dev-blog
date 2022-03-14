@@ -10,7 +10,7 @@ function About({ about }) {
   return <main className="">
     <Load isLoading={false}>
       <div className="markdown">
-        <ReactMarkdown>{about.attributes.text}</ReactMarkdown>
+        <ReactMarkdown>{about?.attributes.text}</ReactMarkdown>
       </div>
       <br />
     </Load>

@@ -23,7 +23,7 @@ function AppFooter({ social }) {
             }
           }
         }}
-      >{global.data.attributes.footnote}</ReactMarkdown>
+      >{global.data?.attributes.footnote}</ReactMarkdown>
       <div className="flex media">
         {social.map(({ id, icon, ...props }) => <Icon key={id} role="button" {...props}>{icon}</Icon>)}
       </div>
