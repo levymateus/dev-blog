@@ -9,6 +9,7 @@ import Header from "../components/header"
 import Footer from "../components/footer"
 import Layout from "../components/layout"
 import Topbar from "../components/topbar"
+import Show from "../components/show"
 import GlobalContext from "../contexts/global-context"
 import useProgress from "../hooks/useProgress"
 import useMediaQuery from "../hooks/useMediaQuery"
@@ -38,7 +39,9 @@ const MyApp = ({ Component, pageProps }) => {
           <Hydrate state={pageProps.dehydratedState}>
             <Component {...pageProps} />
           </Hydrate>
-          <Footer social={contact.data.attributes.social} />
+          <Show when={Boolean(contact.data?.attributes?.social)}>
+            <Footer social={contact.data?.attributes?.social} />
+          </Show>
         </Layout>
       </GlobalContext.Provider>
     </QueryClientProvider>
