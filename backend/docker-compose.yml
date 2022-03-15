@@ -7,5 +7,5 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     ports:
-      - "5000:5432"
+      - "5432:5432"
     restart: unless-stopped
