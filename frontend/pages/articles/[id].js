@@ -32,9 +32,11 @@ function Article({ article }) {
 export async function getStaticPaths() {
   const queryClient = new QueryClient({ defaultOptions: defaultOptions })
   const { data: articles } = await queryClient.fetchQuery(['/articles'])
-  const paths = articles.map(({ id }) => ({
+
+  const paths = articles?.map(({ id }) => ({
     params: { id: String(id) },
-  }))
+  })) || defaultPaths
+
   return { paths, fallback: false }
 }
 
