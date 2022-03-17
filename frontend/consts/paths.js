@@ -1,1 +1,1 @@
-export default [{ params: { id: '' } }]
+export default [{ params: { id: 'not-found' } }]
