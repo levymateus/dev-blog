@@ -30,7 +30,7 @@ function Articles({ articles, meta }) {
       <p>No articles published.</p>
     </Show>
     <ArticlesPage articles={articlesSlice} />
-    <Show when={hasData && greatherThanPageSize}>
+    <Show when={hasData && greatherThanPageSize && meta}>
       <Pagination
         page={page}
         meta={meta}
