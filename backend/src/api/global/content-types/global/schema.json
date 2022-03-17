@@ -31,12 +31,14 @@
       "required": true
     },
     "favicon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images"
       ]
+    },
+    "code": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.code"
     }
   }
 }

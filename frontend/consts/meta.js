@@ -1,0 +1,1 @@
+export default { pagination: { pageSize: 1 } }
