@@ -5,9 +5,13 @@ import { defaultOptions } from "../_app"
 import defaultPaths from "../../consts/paths"
 import { useContext } from "react"
 import GlobalContext from "../../contexts/global-context"
+import useNotFound from "../../hooks/useNotFound"
 
 function Article({ article }) {
   const global = useContext(GlobalContext)
+
+  useNotFound(() => !article)
+
   return <main className="articles">
     <Show when={Boolean(article)}>
       <Markdown code={global?.code.style} text={article?.attributes.text || ''} />
@@ -19,11 +23,9 @@ export async function getStaticPaths() {
   const queryClient = new QueryClient({ defaultOptions: defaultOptions })
   const { data: articles } = await queryClient.fetchQuery(['/articles'])
 
-  let paths = defaultPaths
-
-  paths = articles?.map(({ id }) => ({
+  const paths = articles?.map(({ id }) => ({
     params: { id: String(id) },
-  }))
+  })) || defaultPaths
 
   return { paths, fallback: false }
 }
