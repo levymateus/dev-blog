@@ -12,7 +12,7 @@ function AppHeader() {
       <Show when={Boolean(global.data?.attributes.logo.data?.attributes)}>
         <Logo {...global.data?.attributes.logo.data?.attributes} />
       </Show>
-      <h3>{global.data?.attributes.title}</h3>
+      <h3>{global?.title}</h3>
     </div>
     <Nav />
   </header>
