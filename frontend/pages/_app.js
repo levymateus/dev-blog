@@ -12,6 +12,7 @@ import Topbar from "../components/topbar"
 import GlobalContext from "../contexts/global-context"
 import useProgress from "../hooks/useProgress"
 import useMediaQuery from "../hooks/useMediaQuery"
+import defaultGlobal from "../consts/global"
 
 import "../styles/globals.scss"
 import "../styles/nprogress.scss"
@@ -31,14 +32,14 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalContext.Provider value={global}>
+      <GlobalContext.Provider value={global.data?.attributes || defaultGlobal}>
         <Layout>
           <Head />
           {isMobile ? <Topbar /> : <Header />}
           <Hydrate state={pageProps.dehydratedState}>
             <Component {...pageProps} />
           </Hydrate>
-          <Footer social={contact.data.attributes.social} />
+          <Footer social={contact.data?.attributes?.social} />
         </Layout>
       </GlobalContext.Provider>
     </QueryClientProvider>

@@ -32,10 +32,12 @@
     "favicon": {
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
+    },
+    "code": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.code"
     }
   }
 }
