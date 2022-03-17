@@ -14,7 +14,8 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "Blog title"
     },
     "logo": {
       "type": "media",
@@ -26,16 +27,18 @@
     },
     "footnote": {
       "type": "richtext",
-      "default": "Developed by <a href=\"https://github.com/levymateus\">levymateus</a>",
+      "default": "Developed by &nbsp; [levymateus//{\"target\":\"_blank\"}](https://github.com/levymateus)",
       "required": true
     },
     "favicon": {
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
+    },
+    "code": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.code"
     }
   }
 }

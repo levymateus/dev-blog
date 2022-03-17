@@ -2,14 +2,19 @@ import { useEffect } from "react"
 import { useRouter } from "next/router"
 import nProgress from "nprogress"
 
+import useLockedBody from "./useLockedBody"
+
 function useProgress() {
   const router = useRouter()
+  const [, setLocked] = useLockedBody(false)
 
   useEffect(() => {
     const handleStart = () => {
+      setLocked(true)
       nProgress.start()
     }
     const handleStop = () => {
+      setLocked(false)
       nProgress.done()
     }
 

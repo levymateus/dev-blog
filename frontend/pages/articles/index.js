@@ -7,6 +7,7 @@ import Pagination from "../../components/pagination"
 import Show from "../../components/show"
 import ErrorFallback from "../../components/error"
 import { defaultOptions } from "../_app"
+import defaultMeta from "../../consts/meta"
 
 function Articles({ articles, meta }) {
   const { query, isReady, push, route } = useRouter()
@@ -29,7 +30,7 @@ function Articles({ articles, meta }) {
       <p>No articles published.</p>
     </Show>
     <ArticlesPage articles={articlesSlice} />
-    <Show when={hasData && greatherThanPageSize}>
+    <Show when={hasData && greatherThanPageSize && meta}>
       <Pagination
         page={page}
         meta={meta}
@@ -50,8 +51,8 @@ export async function getStaticProps() {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      articles: data,
-      meta,
+      articles: data || [],
+      meta: meta || defaultMeta,
     },
   }
 }
