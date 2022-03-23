@@ -9,7 +9,7 @@ function AppFooter({ social }) {
   return <footer>
     <div className="flex">
       <Markdown
-        code={global?.code.style}
+        code={global?.code?.style}
         text={global?.footnote}
       />
       <Show when={Boolean(social && social.length)}>

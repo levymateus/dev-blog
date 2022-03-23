@@ -1,4 +1,3 @@
-import PropTypes from "prop-types"
 import Link from "next/link"
 import Moment from "./moment"
 
@@ -11,14 +10,6 @@ function ArticleCard({ createdAt, title, description, href, as }) {
       <a role="link" className="font-5 cursor-pointer">Read more...</a>
     </Link>
   </div>
-}
-
-ArticleCard.propTypes = {
-  createdAt: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  href: PropTypes.string,
-  as: PropTypes.string
 }
 
 export default ArticleCard

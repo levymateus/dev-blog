@@ -9,9 +9,7 @@ function AppHeader() {
   const global = useContext(GlobalContext)
   return <header>
     <div className="flex">
-      <Show when={Boolean(global.data?.attributes.logo.data?.attributes)}>
-        <Logo {...global.data?.attributes.logo.data?.attributes} />
-      </Show>
+      <Logo {...global.logo.data?.attributes} />
       <h3>{global?.title}</h3>
     </div>
     <Nav />
