@@ -5,11 +5,7 @@
   }
 
   footer {
-    padding: 72px 0px;
-  }
-
-  footer > div.flex {
-    width: 900px;
+    padding: 48px 0px;
   }
 
   header {
@@ -27,11 +23,12 @@
   }
 
   footer {
-    padding: 0;
+    padding: 32px 0px;
   }
 
   footer > div.flex {
     width: 100%;
+    flex-direction: column;
   }
 
   header {

@@ -28,6 +28,11 @@ body > div {
   color: inherit;
 }
 
+p {
+  letter-spacing: 0.3px;
+  line-height: 24px;
+}
+
 a {
   color: v.$blue60;
   font-weight: normal;
@@ -168,7 +173,7 @@ h6 {
 .layout {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: auto 1fr 0.4fr;
+  grid-template-rows: auto 1fr auto;
   height: 100%;
   margin: auto;
   align-items: start;
@@ -200,6 +205,7 @@ header {
 }
 
 footer {
+  width: 100%;
   grid-area: footer;
   margin: auto;
   position: relative;
@@ -208,10 +214,10 @@ footer {
   background-color: v.$blue10;
 
   & > div.flex {
-    width: 900px;
     margin: auto;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 
   p {
