@@ -14,7 +14,7 @@ function Article({ article }) {
 
   return <main className="articles">
     <Show when={Boolean(article)}>
-      <Markdown code={global?.code.style} text={article?.attributes.text || ''} />
+      <Markdown code={global?.code?.style} text={article?.attributes.text || ''} />
     </Show>
   </main>
 }
