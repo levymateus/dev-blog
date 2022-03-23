@@ -188,6 +188,7 @@ header {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+  background-color: v.$blue10;
 
   nav {
     ul {
@@ -286,8 +287,26 @@ footer {
   padding-left: 8px;
 }
 
+.pb-8 {
+  padding-bottom: 8px;
+}
+
+.pl-16 {
+  padding-left: 16px;
+}
+
+.pr-16 {
+  padding-right: 16px;
+}
+
 .m-none {
   margin: 0;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 @import './components.scss';

@@ -9,7 +9,7 @@
   }
 
   header {
-    margin-top: 68px;
+    padding-top: 68px;
     display: flex;
     justify-content: space-between;
   }
@@ -31,8 +31,12 @@
     flex-direction: column;
   }
 
+  main {
+    padding-top: 64px;
+  }
+
   header {
-    margin-top: 32px;
+    padding-top: 16px;
     display: flex;
     justify-content: flex-end;
   }
