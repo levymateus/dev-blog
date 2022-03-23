@@ -20,7 +20,7 @@
     "logo": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ]
@@ -30,15 +30,18 @@
       "default": "Developed by &nbsp; [levymateus//{\"target\":\"_blank\"}](https://github.com/levymateus)",
       "required": true
     },
-    "favicon": {
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "code": {
       "type": "component",
       "repeatable": false,
       "component": "shared.code"
+    },
+    "favicon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
