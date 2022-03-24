@@ -1,5 +1,4 @@
 
-import PropTypes from "prop-types"
 
 function Icon({ url, children, label, ...props }) {
   const icons = require("@ant-design/icons")
@@ -16,12 +15,6 @@ function Icon({ url, children, label, ...props }) {
 
   console.warn(`${iconName} not defined in @ant-design/icons!`)
   return null
-}
-
-Icon.propTypes = {
-  url: PropTypes.string,
-  children: PropTypes.string,
-  label: PropTypes.string
 }
 
 export default Icon

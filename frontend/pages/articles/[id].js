@@ -1,40 +1,32 @@
 import { QueryClient } from "react-query"
-import atomDarkTheme from "../../consts/atom-dark-theme"
-import { Prism as SyntaxHighlighter} from "react-syntax-highlighter"
-import ReactMarkdown from "react-markdown"
+import Markdown from "../../components/markdown"
+import Show from "../../components/show"
 import { defaultOptions } from "../_app"
+import defaultPaths from "../../consts/paths"
+import { useContext } from "react"
+import GlobalContext from "../../contexts/global-context"
+import useNotFound from "../../hooks/useNotFound"
 
 function Article({ article }) {
+  const global = useContext(GlobalContext)
+
+  useNotFound(() => !article)
+
   return <main className="articles">
-    <div className="markdown">
-      <ReactMarkdown components={{
-        code: function({ node, inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || '')
-          return !inline && match ? (
-            <SyntaxHighlighter
-              children={String(children).replace(/\n$/, '')}
-              style={atomDarkTheme}
-              language={match[1]}
-              PreTag="div"
-              {...props}
-            />
-          ) : (
-            <code className={className} {...props}>
-              {children}
-            </code>
-          )
-        }
-      }}>{article?.attributes.text || ''}</ReactMarkdown>
-    </div>
+    <Show when={Boolean(article)}>
+      <Markdown code={global?.code?.style} text={article?.attributes.text || ''} />
+    </Show>
   </main>
 }
 
 export async function getStaticPaths() {
   const queryClient = new QueryClient({ defaultOptions: defaultOptions })
   const { data: articles } = await queryClient.fetchQuery(['/articles'])
-  const paths = articles.map(({ id }) => ({
+
+  const paths = articles?.map(({ id }) => ({
     params: { id: String(id) },
-  }))
+  })) || defaultPaths
+
   return { paths, fallback: false }
 }
 

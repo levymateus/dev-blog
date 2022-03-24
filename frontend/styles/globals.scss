@@ -28,6 +28,11 @@ body > div {
   color: inherit;
 }
 
+p {
+  letter-spacing: 0.3px;
+  line-height: 24px;
+}
+
 a {
   color: v.$blue60;
   font-weight: normal;
@@ -168,7 +173,7 @@ h6 {
 .layout {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: auto 1fr 0.4fr;
+  grid-template-rows: auto 1fr auto;
   height: 100%;
   margin: auto;
   align-items: start;
@@ -183,6 +188,7 @@ header {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+  background-color: v.$blue10;
 
   nav {
     ul {
@@ -200,6 +206,7 @@ header {
 }
 
 footer {
+  width: 100%;
   grid-area: footer;
   margin: auto;
   position: relative;
@@ -208,10 +215,10 @@ footer {
   background-color: v.$blue10;
 
   & > div.flex {
-    width: 900px;
     margin: auto;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 
   p {
@@ -280,8 +287,43 @@ footer {
   padding-left: 8px;
 }
 
+.pb-8 {
+  padding-bottom: 8px;
+}
+
+.pl-16 {
+  padding-left: 16px;
+}
+
+.pr-16 {
+  padding-right: 16px;
+}
+
 .m-none {
   margin: 0;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: v.$blue60;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: v.$glow10;
 }
 
 @import './components.scss';

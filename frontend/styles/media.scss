@@ -5,15 +5,11 @@
   }
 
   footer {
-    padding: 72px 0px;
-  }
-
-  footer > div.flex {
-    width: 900px;
+    padding: 48px 0px;
   }
 
   header {
-    margin-top: 68px;
+    padding-top: 68px;
     display: flex;
     justify-content: space-between;
   }
@@ -27,15 +23,20 @@
   }
 
   footer {
-    padding: 0;
+    padding: 32px 0px;
   }
 
   footer > div.flex {
     width: 100%;
+    flex-direction: column;
+  }
+
+  main {
+    padding-top: 64px;
   }
 
   header {
-    margin-top: 32px;
+    padding-top: 16px;
     display: flex;
     justify-content: flex-end;
   }
