@@ -309,5 +309,22 @@ footer {
   left: 0;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: v.$blue60;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
 @import './components.scss';
 @import './media.scss';
