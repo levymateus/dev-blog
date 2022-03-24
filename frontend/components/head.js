@@ -5,7 +5,8 @@ import { getStrapiMedia } from "../lib/media"
 
 function AppHead() {
   const global = useContext(GlobalContext)
-  const iconUrl = getStrapiMedia(global.favicon.data.attributes)
+  const url = global.favicon?.data.attributes.url || ''
+  const iconUrl = getStrapiMedia({ url })
   return <Head>
     <title>{global.title}</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
