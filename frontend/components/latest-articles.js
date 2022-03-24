@@ -1,7 +1,6 @@
 import Icon from "./icon"
 import Link from "next/link"
 import Moment from "./moment"
-import PropTypes from "prop-types"
 
 function LatestArticles({ articles }) {
   return <section className="latest-articles full-width mt-64">
@@ -19,10 +18,6 @@ function LatestArticles({ articles }) {
       </li>)}
     </ol>
   </section>
-}
-
-LatestArticles.propTypes = {
-  articles: PropTypes.object
 }
 
 export default LatestArticles

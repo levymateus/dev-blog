@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import useLang from "../hooks/useLang"
 
 function Moment({ type = 'span', children, className }) {
@@ -15,11 +14,6 @@ function Moment({ type = 'span', children, className }) {
     children: moment,
     className: "moment" + " " + className
   }))
-}
-
-Moment.propTypes = {
-  type: PropTypes.string,
-  children: PropTypes.string
 }
 
 export default Moment
