@@ -1,25 +1,22 @@
 import { useContext } from "react"
 import { withErrorBoundary } from "react-error-boundary"
-import ReactMarkdown from "react-markdown"
+import Markdown from "../components/markdown"
 import { QueryClient, dehydrate } from "react-query"
 
 import ErrorFallback from "../components/error"
-import Load from "../components/load"
 import GlobalContext from "../contexts/global-context"
 import { defaultOptions } from "./_app"
 
 function About({ about }) {
   const global = useContext(GlobalContext)
   return <main className="">
-    <Load isLoading={false}>
-      <div className="markdown">
-        <ReactMarkdown
-          code={global?.code.style}
-          text={about?.attributes.text}
-        />
-      </div>
-      <br />
-    </Load>
+    <div className="markdown">
+      <Markdown
+        code={global?.code?.style}
+        text={about?.attributes.text}
+      />
+    </div>
+    <br />
   </main>
 }
 
