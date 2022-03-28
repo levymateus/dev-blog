@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { getStrapiMedia } from "../lib/media"
 
 function Logo({ url, alt, width = 24, height = 24, caption }) {
@@ -8,7 +7,7 @@ function Logo({ url, alt, width = 24, height = 24, caption }) {
     return null
   }
 
-  return <Image
+  return <img
     width={width}
     height={height}
     src={src}
