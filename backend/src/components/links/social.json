@@ -19,7 +19,20 @@
       "type": "enumeration",
       "enum": [
         "GithubFilled",
-        "LinkedinFilled"
+        "LinkedinFilled",
+        "CodeSandboxCircleFilled",
+        "FacebookFilled",
+        "InstagramFilled",
+        "CodepenCircleFilled",
+        "CodeSandboxSquareFilled",
+        "SlackSquareFilled",
+        "DribbbleCircleFilled",
+        "TwitterCircleFilled",
+        "TwitterSquareFilled",
+        "RedditCircleFilled",
+        "RedditSquareFilled",
+        "CodeFilled",
+        "CodepenSquareFilled"
       ]
     }
   }
