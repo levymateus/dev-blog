@@ -16,6 +16,10 @@
       "type": "richtext",
       "default": "# About",
       "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
     }
   }
 }
