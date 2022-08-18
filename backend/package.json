@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@blog/backend",
   "private": true,
   "version": "1.0.0",
   "description": "A Strapi application",
@@ -9,7 +9,6 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "@strapi/plugin-i18n": "^4.1.3",
     "@strapi/plugin-users-permissions": "^4.1.3",

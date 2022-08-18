@@ -21,6 +21,11 @@
       "type": "component",
       "repeatable": true,
       "component": "links.social"
+    },
+    "title": {
+      "type": "string",
+      "default": "The principal description about you. An brief description.",
+      "required": true
     }
   }
 }
