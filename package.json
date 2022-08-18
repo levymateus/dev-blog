@@ -9,9 +9,5 @@
     "dev": "lerna run dev --stream"
   },
   "private": true,
-  "dependencies": {},
-  "workspaces": [
-    "backend",
-    "frontend"
-  ]
+  "dependencies": {}
 }
