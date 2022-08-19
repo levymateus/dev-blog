@@ -1,23 +1,19 @@
-import { useContext } from "react"
 import { withErrorBoundary } from "react-error-boundary"
-import Markdown from "../components/markdown"
 import { QueryClient, dehydrate } from "react-query"
 
+import Markdown from "../components/markdown"
 import ErrorFallback from "../components/error"
-import GlobalContext from "../contexts/global-context"
 import { defaultOptions } from "./_app"
 
 function About({ about }) {
-  const global = useContext(GlobalContext)
-  return <main className="">
-    <div className="markdown">
-      <Markdown
-        code={global?.code?.style}
-        text={about?.attributes.text}
-      />
-    </div>
-    <br />
-  </main>
+  return (
+    <main>
+      <h1>About</h1>
+      <p>{about?.attributes.description}</p>
+      <Markdown text={about?.attributes.text} />
+      <br />
+    </main>
+  );
 }
 
 export async function getStaticProps() {
