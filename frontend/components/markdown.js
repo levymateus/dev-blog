@@ -1,6 +1,34 @@
 import { useEffect, useRef } from 'react'
 import { marked } from 'marked';
 
+String.prototype.removeChar = function removeChar(char) {
+  return this.replace(char, '')
+}
+
+const renderer = {
+  link(href, title, text) {
+    const targetAttr = { key: '', value: [] }
+    const titleAttr = { key: title || '' }
+    const isBlank = new RegExp(/!.+/g).test(text || '')
+
+    if (isBlank) {
+      targetAttr.value.push('_blank')
+    }
+
+    if (targetAttr.value.length) {
+      targetAttr.key = "target=" + targetAttr.value.join('|')
+    }
+
+    let innerHTML = !!targetAttr.key ? text.removeChar('!') : text
+
+    return `
+      <a href="${href}" ${titleAttr.key} ${targetAttr.key}>${innerHTML}</a>
+    `
+  }
+}
+
+marked.use({ renderer })
+
 function Markdown({ text, code: style }) {
   const ref = useRef(null)
 
