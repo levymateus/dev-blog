@@ -25,7 +25,7 @@ export const defaultOptions = {
 
 const MyApp = ({ Component, pageProps }) => {
   const [queryClient] = useState(() => new QueryClient({ defaultOptions }))
-  const isMobile = useMediaQuery('(max-width: 1024px)', true, false)
+  const isMobile = Boolean(useMediaQuery('(max-width: 1024px)', true, false))
   const { global, contact } = pageProps
 
   useProgress()
