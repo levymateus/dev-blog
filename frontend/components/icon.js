@@ -10,7 +10,7 @@ function Icon({ url, children, label, ...props }) {
   const iconName = children
   const Icon = icons[iconName]
   if (Icon) {
-    return <a href={url} target="_blank" {...props}><Icon>{label}</Icon></a>
+    return <a href={url} role="link" target="_blank" {...props}><Icon>{label}</Icon></a>
   }
 
   console.warn(`${iconName} not defined in @ant-design/icons!`)
