@@ -8,7 +8,7 @@ import { defaultOptions } from "./_app"
 function About({ about }) {
   return (
     <main>
-      <h1>About</h1>
+      <h1 id="about">About</h1>
       <p>{about?.attributes.description}</p>
       <Markdown text={about?.attributes.text} />
       <br />

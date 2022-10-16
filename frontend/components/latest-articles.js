@@ -5,8 +5,8 @@ import Moment from "./moment"
 function LatestArticles({ articles }) {
   return <section className="latest-articles full-width mt-64">
     <div className="flex flex-row flex-align-center flex-align-between">
-      <h2>Latest Articles</h2>
-      <Link role="button" href="/articles">All articles &gt;&gt;</Link>
+      <h2 id="latest-articles">Latest Articles</h2>
+      <Link role="button" href="/articles#articles">All articles &gt;&gt;</Link>
     </div>
     <ol role="list">
       {articles.data.map((article) => <li className="mb-16" key={article.id}>
