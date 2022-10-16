@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { marked } from 'marked';
+import { marked } from 'marked'
+import hljs from 'highlight.js'
 
 String.prototype.removeChar = function removeChar(char) {
   return this.replace(char, '')
@@ -28,6 +29,10 @@ const renderer = {
 }
 
 marked.use({ renderer })
+
+marked.setOptions({
+  highlight: (code) => hljs.highlight(code, { language: 'javascript' }).value
+})
 
 function Markdown({ text, code: style }) {
   const ref = useRef(null)
