@@ -1,4 +1,5 @@
-@use "./variables.scss" as v;
+@use "variables.scss" as v;
+@import "lang-theme.css";
 
 html,
 body {
@@ -255,6 +256,10 @@ footer {
   margin-bottom: 8px;
 }
 
+.mb-16 {
+  margin-bottom: 16px;
+}
+
 .mr-16 {
   margin-left: 16px;
 }
@@ -297,6 +302,10 @@ footer {
 
 .pr-16 {
   padding-right: 16px;
+}
+
+.pb-16 {
+  padding-bottom: 16px;
 }
 
 .m-none {

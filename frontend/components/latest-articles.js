@@ -8,10 +8,10 @@ function LatestArticles({ articles }) {
       <h2>Latest Articles</h2>
       <Link role="button" href="/articles">All articles &gt;&gt;</Link>
     </div>
-    <ol>
+    <ol role="list">
       {articles.data.map((article) => <li className="mb-16" key={article.id}>
-        <div className="flex flex-align-center mb-8">
-          <Icon className="p-4" role="icon">BulbFilled</Icon>
+        <div role="group" className="flex flex-align-center mb-8">
+          <Icon role="listitem" className="p-4">BulbFilled</Icon>
           <h3 className="pl-8 m-none">{article.attributes.title}</h3>
         </div>
         <Moment className="pos-rel pos-left-32 pos-top-0">{article.attributes.createdAt}</Moment>
