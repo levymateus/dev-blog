@@ -1,19 +1,18 @@
-import { getStrapiMedia } from "../lib/media"
+import Image from "./image"
 
-function Logo({ url, alt, width = 24, height = 24, caption }) {
-  const src = getStrapiMedia({ url })
-
-  if(!src) {
-    return null
-  }
-
-  return <img
-    width={width}
-    height={height}
-    src={src}
-    alt={alt}
-    caption={caption}
-  />
+function Logo({ title, url, caption, alternativeText }) {
+  return <div className="flex" >
+    <Image
+      url={url}
+      caption={caption}
+      alt={alternativeText}
+      width={24}
+      height={24}
+    />
+    <h3>{title}</h3>
+  </div>
 }
+
+Logo.displayName = 'Logo'
 
 export default Logo

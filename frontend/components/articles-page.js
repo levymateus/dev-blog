@@ -13,8 +13,8 @@ function ArticlesPage({ articles }) {
           title={article.attributes.title}
           description={article.attributes.description}
           createdAt={article.attributes.createdAt}
-          href="/articles/[id]"
-          as={`/articles/${article.id}`}
+          href="/articles/[id]#title"
+          as={`/articles/${article.id}#title`}
         />
       </li>)}
     </ul>

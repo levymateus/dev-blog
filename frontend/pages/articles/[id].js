@@ -9,7 +9,11 @@ function Article({ article }) {
 
   useNotFound(() => !article)
 
+  console.log(article)
+
   return <main className="articles">
+    <h1 id="title" className="font-1">{article.attributes?.title}</h1>
+    <h2 id="subtitle" className="font-3">{article.attributes?.description}</h2>
     <Show when={Boolean(article)}>
       <Markdown text={article?.attributes.text || ''} />
     </Show>
