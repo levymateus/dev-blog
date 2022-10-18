@@ -37,6 +37,10 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 128
     }
   }
 }

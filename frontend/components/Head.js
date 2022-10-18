@@ -9,6 +9,7 @@ function AppHead() {
   const iconUrl = getStrapiMedia({ url })
   return <Head>
     <title>{global.title}</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta name="description" content={global.description}></meta>
     <link rel="icon" href={iconUrl} />
   </Head>

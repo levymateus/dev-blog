@@ -1,4 +1,4 @@
-import Contact from "../components/Contact";
+import Contact from "../components/Contact"
 import LatestPosts from "../components/LatestPosts"
 import Show from "../components/Show"
 import queryFn from "../utils/queryFn"

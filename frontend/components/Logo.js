@@ -4,13 +4,13 @@ import Link from "next/link"
 
 import styles from "./Logo.module.scss"
 
-function Logo({ title, url, caption, alternativeText }) {
+function Logo({ title, url, caption, alt }) {
   return <Link href="/#title">
     <div className={styles.logo}>
       <Image
         url={url}
         caption={caption}
-        alt={alternativeText}
+        alt={alt}
         width={24}
         height={24}
       />
