@@ -1,0 +1,50 @@
+@use "../styles/colors.scss" as colors;
+
+@import "mixins.scss";
+
+footer.footer {
+  display: flex;
+  width: 100%;
+  grid-area: footer;
+  margin: auto;
+
+  position: relative;
+  bottom: 0;
+  left: 0;
+
+  margin: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    font-size: 16px;
+    display: flex;
+    width: 100%;
+    line-height: 24px;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    font-size: 24px;
+    li + li {
+      margin-left: 8px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  footer.footer {
+    padding: 48px 0px;
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  footer.footer {
+    padding: 32px 0px 94px 0px;
+    width: 100%;
+    flex-direction: column;
+  }
+}

@@ -1,6 +1,7 @@
 export default {
   title: 'Blog title',
-  footnote: `Developed by &nbsp; [levymateus//{"target":"_blank"}](https://github.com/levymateus)`,
+  description: '',
+  footnote: `Developed by &nbsp; [levymateus](https://github.com/levymateus)`,
   logo: '',
   logo: {
     data: {

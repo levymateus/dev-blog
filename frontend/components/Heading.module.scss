@@ -1,0 +1,20 @@
+@use "../styles/colors.scss" as colors;
+@import "../styles/fonts.scss";
+
+h4.heading, h5.heading, h6.heading {
+  @include text-lg;
+  color: colors.$neutral-200;
+}
+
+h1.heading {
+  @include text-4xl;
+  padding: 48px 0px 32px 0px;
+}
+
+h2.heading {
+  @include text-3xl;
+}
+
+h3.heading {
+  @include text-2xl;
+}

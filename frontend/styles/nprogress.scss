@@ -1,4 +1,4 @@
-@use "./variables.scss" as v;
+@use "colors.scss" as colors;
 
 /* Make clicks pass-through */
 #nprogress {
@@ -6,7 +6,7 @@
 }
 
 #nprogress .bar {
-  background: v.$glow20;
+  background: colors.$green-200;
 
   position: fixed;
   z-index: 1031;
@@ -23,7 +23,7 @@
   position: absolute;
   right: 0px;
   width: 100px;
-  box-shadow: 0 0 10px v.$glow20, 0 0 5px v.$glow20;
+  box-shadow: 0 0 10px colors.$green-200, 0 0 5px colors.$green-200;
   opacity: 1;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);

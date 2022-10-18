@@ -1,0 +1,10 @@
+@use "../styles/colors.scss" as colors;
+
+.logo {
+  display: flex;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    color: colors.$neutral-200;
+  }
+}

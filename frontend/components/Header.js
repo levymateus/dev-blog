@@ -1,12 +1,14 @@
-import Nav from "./nav"
-import Logo from "./logo"
+import Nav from "./Nav"
+import Logo from "./Logo"
 
 import { useContext } from "react"
 import { GlobalContext } from "../contexts/global-context"
 
-function AppHeader() {
+import styles from "./Header.module.scss"
+
+function Header() {
   const global = useContext(GlobalContext)
-  return <header className="flex flex-align-between pl-16 pr-16 pb-8 z-200">
+  return <header className={styles.header}>
     <Logo
       title={global?.title}
       url={global.logo.data?.attributes.url}
@@ -19,6 +21,6 @@ function AppHeader() {
   </header>
 }
 
-AppHeader.displayName = 'Header'
+Header.displayName = 'Header'
 
-export default AppHeader
+export default Header

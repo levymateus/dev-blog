@@ -1,6 +1,6 @@
-import Contact from "../components/contact";
-import LatestArticles from "../components/latest-articles"
-import Show from "../components/show"
+import Contact from "../components/Contact";
+import LatestPosts from "../components/LatestPosts"
+import Show from "../components/Show"
 import queryFn from "../utils/queryFn"
 
 const HomePage = ({ contact, articles }) => {
@@ -8,7 +8,7 @@ const HomePage = ({ contact, articles }) => {
     <main>
       <Contact contact={contact} />
       <Show when={articles.data?.length}>
-        <LatestArticles articles={articles} />
+        <LatestPosts articles={articles} />
       </Show>
     </main>
   );

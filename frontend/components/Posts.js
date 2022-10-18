@@ -1,15 +1,17 @@
-import ArticleCard from "./article-card"
+import Post from "./Post"
 
-function ArticlesPage({ articles }) {
+import styles from "./Posts.module.scss"
+
+function Posts({ articles }) {
 
   if (!articles.length) {
     return null
   }
 
-  return <section>
+  return <section className={styles.posts}>
     <ul>
       {articles.map(article => <li key={article.id}>
-        <ArticleCard
+        <Post
           title={article.attributes.title}
           description={article.attributes.description}
           createdAt={article.attributes.createdAt}
@@ -21,4 +23,4 @@ function ArticlesPage({ articles }) {
   </section>
 }
 
-export default ArticlesPage
+export default Posts

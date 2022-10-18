@@ -1,19 +1,16 @@
 import { QueryClient } from "react-query"
-import Markdown from "../../components/markdown"
-import Show from "../../components/show"
+import Markdown from "../../components/Markdown"
+import Heading from "../../components/Heading"
+import Show from "../../components/Show"
 import { defaultOptions } from "../_app"
 import defaultPaths from "../../consts/paths"
 import useNotFound from "../../hooks/useNotFound"
 
 function Article({ article }) {
-
   useNotFound(() => !article)
-
-  console.log(article)
-
   return <main className="articles">
-    <h1 id="title" className="font-1">{article.attributes?.title}</h1>
-    <h2 id="subtitle" className="font-3">{article.attributes?.description}</h2>
+    <Heading type="h1" id="title">{article.attributes?.title}</Heading>
+    <Heading type="h4" id="subtitle">{article.attributes?.description}</Heading>
     <Show when={Boolean(article)}>
       <Markdown text={article?.attributes.text || ''} />
     </Show>

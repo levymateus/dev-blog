@@ -1,0 +1,41 @@
+@use "../styles/colors.scss" as colors;
+@import "../styles/fonts.scss";
+
+button.button {
+  @include text-base;
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &[data-variant="secondary"] {
+    color: colors.$neutral-100;
+    background-color: transparent;
+    &:focus {
+      border: 2px solid rgba($color: colors.$blue-500, $alpha: 0.5);
+    }
+    &:active {
+      border: 2px solid rgba($color: colors.$blue-300, $alpha: 0.5);
+    }
+    &:focus-visible {
+      border: 2px solid rgba($color: colors.$blue-300, $alpha: 0.5);
+    }
+  }
+
+  &[data-variant="secondary"]:hover {
+    color: colors.$green-100;
+    border: 2px solid rgba($color: colors.$blue-100, $alpha: 0.5);
+    background-color: rgba($color: colors.$blue-300, $alpha: 0.41);
+  }
+
+  &[data-active="true"] {
+    color: colors.$neutral-100;
+    border: 2px solid rgba($color: colors.$blue-300, $alpha: 0.5);
+  }
+
+  &[data-active="false"] {
+    border: 2px solid transparent;
+  }
+}

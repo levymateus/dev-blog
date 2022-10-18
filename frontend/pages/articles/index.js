@@ -2,12 +2,13 @@ import { QueryClient, dehydrate } from "react-query"
 import { withErrorBoundary } from "react-error-boundary"
 import { useRouter } from "next/router"
 
-import ArticlesPage from "../../components/articles-page"
-import Pagination from "../../components/pagination"
-import Show from "../../components/show"
-import ErrorFallback from "../../components/error"
+import ArticlesPage from "../../components/Posts"
+import Pagination from "../../components/Pagination"
+import ErrorFallback from "../../components/Error"
+import Show from "../../components/Show"
 import { defaultOptions } from "../_app"
 import defaultMeta from "../../consts/meta"
+import Heading from "../../components/Heading"
 
 function Articles({ articles, meta }) {
   const { query, isReady, push, route } = useRouter()
@@ -15,7 +16,7 @@ function Articles({ articles, meta }) {
   const { pagination: { pageSize } } = meta
 
   function handleChange(page) {
-    push(`${route}?page=${page}`, null, { scroll: false })
+    push(`${route}?page=${page}#articles`, null, { scroll: false })
   }
 
   const hasData = !!articles.length
@@ -25,7 +26,7 @@ function Articles({ articles, meta }) {
   const articlesSlice = articles.slice(page - 1, Math.ceil((page - 1) + pageSize))
 
   return <main className="articles">
-    <h1 id="articles">Articles</h1>
+    <Heading type="h1" id="articles">Articles</Heading>
     <Show when={isEmptyResponse}>
       <p>No articles published.</p>
     </Show>

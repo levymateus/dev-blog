@@ -1,0 +1,8 @@
+@use "../styles/colors.scss" as colors;
+
+section.contact {
+  h1 {
+    color: colors.$green-200;
+  }
+  margin-bottom: 48px;
+}

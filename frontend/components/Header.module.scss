@@ -1,0 +1,53 @@
+@use "../styles/colors.scss" as colors;
+@import "mixins.scss";
+
+header.header {
+  grid-area: header;
+  width: 100%;
+  gap: 24px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: colors.$blue-900;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 32px 16px 8px 0px;
+  z-index: 200;
+
+  nav {
+    ul {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 24px;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  header.header {
+    padding-top: 68px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  header.header {
+    @include fixed-bottom;
+    padding-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+
+    h3, img {
+      display: none;
+    }
+  }
+}

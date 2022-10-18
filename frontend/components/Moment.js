@@ -1,6 +1,8 @@
 import React from "react"
 import useLang from "../hooks/useLang"
 
+import styles from "./Moment.module.scss"
+
 function Moment({ type = 'span', children, className }) {
   const lang = useLang()
 
@@ -12,7 +14,7 @@ function Moment({ type = 'span', children, className }) {
 
   return React.createElement(type, ({
     children: moment,
-    className: "moment" + " " + className
+    className: styles.moment
   }))
 }
 

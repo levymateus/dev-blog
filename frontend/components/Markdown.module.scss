@@ -1,0 +1,33 @@
+@use "../styles/colors.scss" as colors;
+@import "../styles/fonts.scss";
+
+.markdown {
+  max-width: 900px;
+  img {
+    max-width: 900px;
+  }
+  p {
+    @include text-base;
+    margin: 32px 0px;
+  }
+  h1 {
+    @include text-2xl;
+    margin: 48px 0px;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol, ul {
+    padding: 0 32px;
+    margin: 32px 0;
+    li + li {
+      margin: 8px 0;
+    }
+  }
+  pre {
+    margin: 32px 0;
+  }
+}

@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
 
+import styles from "./Markdown.module.scss"
+
 String.prototype.removeChar = function removeChar(char) {
   return this.replace(char, '')
 }
@@ -44,7 +46,7 @@ function Markdown({ text }) {
     }
   }, [ref])
 
-  return <div ref={ref} className="markdown"></div>
+  return <div ref={ref} className={styles.markdown}></div>
 }
 
 export default Markdown

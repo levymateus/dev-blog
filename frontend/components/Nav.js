@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import Link from "next/link"
-import Button from "./button"
+import Button from "./Button"
 
 function AppNav() {
   const router = useRouter()
