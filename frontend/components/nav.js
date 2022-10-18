@@ -9,17 +9,17 @@ function AppNav() {
   return <nav>
     <ul>
       <li>
-        <Link href="/articles">
+        <Link href="/articles#articles">
           <Button variant="secondary" active={"articles" === route}>Articles</Button>
         </Link>
       </li>
       <li>
-        <Link href="/about">
+        <Link href="/about#about">
           <Button variant="secondary" active={"about" === route}>About</Button>
         </Link>
       </li>
       <li>
-        <Link href="/">
+        <Link href="/#title">
           <Button variant="secondary" active={"" === route}>Contact</Button>
         </Link>
       </li>

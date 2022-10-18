@@ -25,7 +25,7 @@ function Articles({ articles, meta }) {
   const articlesSlice = articles.slice(page - 1, Math.ceil((page - 1) + pageSize))
 
   return <main className="articles">
-    <h1>Articles</h1>
+    <h1 id="articles">Articles</h1>
     <Show when={isEmptyResponse}>
       <p>No articles published.</p>
     </Show>

@@ -34,7 +34,7 @@ marked.setOptions({
   highlight: (code) => hljs.highlight(code, { language: 'javascript' }).value
 })
 
-function Markdown({ text, code: style }) {
+function Markdown({ text }) {
   const ref = useRef(null)
 
   useEffect(() => {

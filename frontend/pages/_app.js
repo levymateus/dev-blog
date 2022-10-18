@@ -8,10 +8,8 @@ import Head from "../components/head"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Layout from "../components/layout"
-import Topbar from "../components/topbar"
 import GlobalContext from "../contexts/global-context"
 import useProgress from "../hooks/useProgress"
-import useMediaQuery from "../hooks/useMediaQuery"
 import defaultGlobal from "../consts/global"
 
 import "../styles/globals.scss"
@@ -25,7 +23,6 @@ export const defaultOptions = {
 
 const MyApp = ({ Component, pageProps }) => {
   const [queryClient] = useState(() => new QueryClient({ defaultOptions }))
-  const isMobile = Boolean(useMediaQuery('(max-width: 1024px)', true, false))
   const { global, contact } = pageProps
 
   useProgress()
@@ -35,7 +32,7 @@ const MyApp = ({ Component, pageProps }) => {
       <GlobalContext.Provider value={global.data?.attributes || defaultGlobal}>
         <Layout>
           <Head />
-          {isMobile ? <Topbar /> : <Header />}
+          <Header />
           <Hydrate state={pageProps.dehydratedState}>
             <Component {...pageProps} />
           </Hydrate>
