@@ -2,12 +2,8 @@
   "name": "blog",
   "version": "1.0.0",
   "license": "MIT",
-  "devDependencies": {
-    "lerna": "^4.0.0"
-  },
-  "scripts": {
-    "dev": "lerna run dev --stream"
-  },
+  "devDependencies": {},
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "workspaces": ["backend", "frontend"]
 }
