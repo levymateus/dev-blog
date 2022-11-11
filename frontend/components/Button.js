@@ -1,18 +1,14 @@
-import { forwardRef } from "react"
+import clsx from "clsx"
 
-import styles from "./Button.module.scss"
-
-const Button = forwardRef(({ children, variant = 'primary', active, className, ...props }, ref) =>  {
+function Button({ variant = 'primary', children, ...props }) {
   return <button
-    ref={ref}
-    role="button"
-    data-variant={variant}
-    data-active={active}
-    className={styles.button}
+    type="button"
+    className={clsx("flex rounded p-2", {
+      'bg-black dark:bg-neutral-800 text-white': variant === 'primary',
+      'text-black dark:text-white': variant === 'secondary'
+    })}
     {...props}
   >{children}</button>
-})
-
-Button.displayName = 'Button'
+}
 
 export default Button

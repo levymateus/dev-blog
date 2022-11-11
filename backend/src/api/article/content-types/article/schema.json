@@ -23,19 +23,9 @@
       "type": "richtext",
       "required": true
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category"
-    },
     "description": {
       "type": "text",
       "required": true
-    },
-    "keywords": {
-      "type": "component",
-      "repeatable": true,
-      "component": "links.keyword"
     }
   }
 }

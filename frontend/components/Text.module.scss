@@ -1,7 +1,0 @@
-@use "../styles/colors.scss" as colors;
-@import "../styles/fonts.scss";
-
-.text {
-  @include text-base;
-  color: colors.$neutral-200;
-}

@@ -16,31 +16,6 @@
       "type": "string",
       "required": true,
       "default": "Blog title"
-    },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "footnote": {
-      "type": "richtext",
-      "default": "Developed by &nbsp; [levymateus//{\"target\":\"_blank\"}](https://github.com/levymateus)",
-      "required": true
-    },
-    "favicon": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "description": {
-      "type": "string",
-      "maxLength": 128
     }
   }
 }

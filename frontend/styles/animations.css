@@ -1,0 +1,27 @@
+.bounce-left {
+  animation: bounceLeft var(--duration, 1s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.bounce-right {
+  animation: bounceRight var(--duration, 1s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes bounceLeft {
+  from {
+    transform: translateX(0px)
+  }
+  to {
+    transform: translateX(-100px)
+  }
+}
+
+@keyframes bounceRight {
+  from {
+    transform: translateX(-100px)
+  }
+  to {
+    transform: translateX(0px)
+  }
+}
