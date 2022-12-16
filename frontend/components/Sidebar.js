@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Animation from "@components/Animation"
 import NavLink from "@components/NavLink"
 import useStore from "@hooks/useStore"
 import useList from "@hooks/useList"
+import useOnClickOutside from "@hooks/useOnClickOutside"
 import max from "@utils/max"
 import clsx from "clsx"
 
@@ -14,7 +15,8 @@ const items = [
   { href: '/projects', name: 'Projects', duration: 1.2 }
 ]
 
-function Sidebar() {
+function Sidebar({ onSelectItem }) {
+  const ref = useRef()
   const [list, { forEach }] = useList(items)
   const [isOpen, setOpen] = useStore(({ sidebarIsOpen, setSidebarOpen }) => [sidebarIsOpen, setSidebarOpen])
   const [isVisible, setVisible] = useState(false)
@@ -36,8 +38,10 @@ function Sidebar() {
     if (isOpen) setVisible(true)
   }, [isOpen])
 
-  return <aside className={clsx("sm:hidden w-3/4", { 'visible': isVisible, 'hidden': !isVisible })}>
-    <ul className="flex flex-col gap-8 pt-10">
+  // useOnClickOutside(ref, () => setOpen(false))
+
+  return <aside ref={ref} className={clsx("absolute sm:hidden w-3/4 h-screen", { 'visible': isVisible, 'hidden': !isVisible })}>
+    <ul className="flex flex-col gap-8">
       {list.map(({ name, href, duration }, index) => (
         <Animation
           asChild
@@ -54,6 +58,7 @@ function Sidebar() {
               onClick={() => {
                 setOpen(false)
                 rearrange(index)
+                onSelectItem()
               }}
             >
               {name}

@@ -8,20 +8,34 @@
   animation-timing-function: ease-in-out;
 }
 
+.blur-in {
+  animation: blurIn var(--duration, 1s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
 @keyframes bounceLeft {
   from {
-    transform: translateX(0px)
+    transform: translateX(var(--from, 0px))
   }
   to {
-    transform: translateX(-100px)
+    transform: translateX(var(--to, -100px))
   }
 }
 
 @keyframes bounceRight {
   from {
-    transform: translateX(-100px)
+    transform: translateX(var(--from, -100px))
   }
   to {
-    transform: translateX(0px)
+    transform: translateX(var(--to, 0px))
+  }
+}
+
+@keyframes blurIn {
+  from {
+    filter: blur(0px);
+  }
+  to {
+    filter: blur(4px);
   }
 }
