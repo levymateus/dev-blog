@@ -32,18 +32,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps() {
-  console.log(JSON.stringify(process.env))
-  let file = await fetch(
-    `http://192.168.100.85:3000/DOC.md`,
-    {
-      method: 'GET'
-    }
-  )
-  file = await file.text()
   return {
     props: {
       title: 'Lore ipsum.',
-      content: file
+      content: ''
     }
   }
 }
