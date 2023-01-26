@@ -13,41 +13,41 @@ module.exports = {
     },
     extend: {
       fontSize: {
-        xs: ['11px', {
-          lineHeight: '13px',
+        xs: ['12px', {
+          lineHeight: '15px',
           letterSpacing: 0,
           fontWeight: 300
         }],
-        sm: ['13px', {
-          lineHeight: '15px',
-          letterSpacing: 0
-        }],
-        base: ['14px', {
-          lineHeight: '16px',
-          letterSpacing: 0
-        }],
-        lg: ['15px', {
+        sm: ['15px', {
           lineHeight: '17px',
           letterSpacing: 0
         }],
-        xl: ['16px', {
+        base: ['16px', {
           lineHeight: '18px',
           letterSpacing: 0
         }],
-        '2xl': ['20px', {
-          lineHeight: '23px',
+        lg: ['17px', {
+          lineHeight: '19px',
           letterSpacing: 0
         }],
-        '3xl': ['24px', {
-          lineHeight: '28px',
+        xl: ['18px', {
+          lineHeight: '20px',
           letterSpacing: 0
         }],
-        '4xl': ['36px', {
-          lineHeight: '41px',
+        '2xl': ['22px', {
+          lineHeight: '25px',
           letterSpacing: 0
         }],
-        '5xl': ['40px', {
-          lineHeight: '46px',
+        '3xl': ['26px', {
+          lineHeight: '30px',
+          letterSpacing: 0
+        }],
+        '4xl': ['38px', {
+          lineHeight: '43px',
+          letterSpacing: 0
+        }],
+        '5xl': ['42px', {
+          lineHeight: '48px',
           letterSpacing: 0
         }],
       },

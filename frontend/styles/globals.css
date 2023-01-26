@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "code-js-theme.css";
+@import "ngprogress.css";
+
 .bg-rw-teal {
   background: linear-gradient(91.17deg, #97EEE4 -1.09%, #14B8A6 36.12%, #0B9787 73.15%);
 }
@@ -20,6 +23,10 @@
 
 .markdown h1, h2, h3, h4, h5, h6, p, em, strong, a {
   color: black;
+}
+
+.dark .markdown {
+  color: white;
 }
 
 .dark .markdown h1,

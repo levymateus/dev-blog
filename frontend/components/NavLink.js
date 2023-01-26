@@ -7,10 +7,11 @@ import Text from "@components/Text"
 function NavLink({
   href,
   children = '',
-  size = 'xl'
+  size = 'xl',
+  ...props
 }) {
   const { route } = useRouter()
-  return <Link href={href} passHref>
+  return <Link href={href} {...props} passHref>
     <Text
       className={clsx("hover:underline px-4 py-2", {
         'font-bold': route === href

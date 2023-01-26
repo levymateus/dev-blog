@@ -1,14 +1,27 @@
 import Heading from "@components/Heading"
 import Text from "@components/Text"
-import Input from "@components/Input"
+import InputText, { Input } from "@components/Input"
 import Button from "@components/Button"
 import Stepper from "@components/Stepper"
 import TextArea from "@components/TextArea"
 import { ArrowRight } from "react-feather"
-import { useRef } from "react"
+import { useRouter } from "next/router"
+import { useRef, useEffect } from "react"
+import useStore from "@hooks/useStore"
 
 function Card() {
+  const emailInputRef = useRef()
   const values = useRef(new Map())
+  const router = useRouter()
+  const hash = router.asPath.split('#')[1]
+  const [setAppBarIsVisible] = useStore(store => [store.setAppBarIsVisible])
+
+  useEffect(() => {
+    if (hash === 'contact' && emailInputRef.current) {
+      emailInputRef.current.focus()
+      setAppBarIsVisible(false)
+    }
+  }, [hash, setAppBarIsVisible])
 
   return <div className="flex flex-col rounded bg-cyan-100 bg-rw-rw px-3 py-5">
 
@@ -44,10 +57,12 @@ function Card() {
       >
         <div action="post" className="mt-8">
           <Stepper.Step num={1}>
-            <Input name="email" type="email" required placeholder="you-email@email.com" />
+            <InputText>
+              <Input.Input ref={emailInputRef} name="email" type="email" required placeholder="you-email@email.com" />
+            </InputText>
           </Stepper.Step>
           <Stepper.Step num={2}>
-            <TextArea name="text" type="message" required rows={3} placeholder="text" />
+            <TextArea autoFocus name="text" type="message" required rows={3} placeholder="text" />
           </Stepper.Step>
         </div>
 
@@ -56,8 +71,8 @@ function Card() {
             variant="secondary"
             type="submit"
           >
-            <div className="flex items-center gap-1">
-              <Text>{step === 1 ? 'Send message' : 'Submit'}</Text>
+            <div className="flex items-center">
+              <Text className="pr-1">{step === 1 ? 'Send message' : 'Submit'}</Text>
               <ArrowRight width={14} height={14} />
             </div>
           </Button>

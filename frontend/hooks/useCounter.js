@@ -1,15 +1,18 @@
 import { useState } from 'react'
 
-function useCounter(initialValue, maxCountValue) {
-  const [count, setCount] = useState(initialValue || 0)
+function useCounter(initialValue = 0, maxCountValue = null) {
+  const [count, setCount] = useState(initialValue)
 
   const increment = () => setCount(x => {
-    if ((maxCountValue && x + 1 <= maxCountValue) || !maxCountValue)
+    if (
+      (maxCountValue !== null && x + 1 <= maxCountValue) ||
+      (maxCountValue === null)
+    )
       return x + 1
     return x
   })
   const decrement = () => setCount(x => x - 1)
-  const reset = () => setCount(initialValue || 0)
+  const reset = () => setCount(initialValue)
 
   return {
     count,

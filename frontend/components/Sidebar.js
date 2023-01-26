@@ -3,16 +3,15 @@ import Animation from "@components/Animation"
 import NavLink from "@components/NavLink"
 import useStore from "@hooks/useStore"
 import useList from "@hooks/useList"
-import useOnClickOutside from "@hooks/useOnClickOutside"
 import max from "@utils/max"
 import clsx from "clsx"
+import useEventListener from "@hooks/useEventListener"
 
 const items = [
   { href: '/', name: 'Home', duration: 0.4 },
   { href: '/about', name: 'About', duration: 0.6 },
-  { href: '/contact', name: 'Contact', duration: 0.8 },
+  { href: '/#contact', name: 'Contact', duration: 0.8 },
   { href: '/snippets', name: 'Snippets', duration: 1.0 },
-  { href: '/projects', name: 'Projects', duration: 1.2 }
 ]
 
 function Sidebar({ onSelectItem }) {
@@ -38,10 +37,16 @@ function Sidebar({ onSelectItem }) {
     if (isOpen) setVisible(true)
   }, [isOpen])
 
-  // useOnClickOutside(ref, () => setOpen(false))
+  useEventListener('scroll', () => {
+    if (isOpen) {
+      setOpen(false)
+      rearrange(0)
+      onSelectItem()
+    }
+  })
 
-  return <aside ref={ref} className={clsx("absolute sm:hidden w-3/4 h-screen", { 'visible': isVisible, 'hidden': !isVisible })}>
-    <ul className="flex flex-col gap-8">
+  return <aside ref={ref} className={clsx("absolute sm:hidden h-screen", { 'visible': isVisible, 'hidden': !isVisible })}>
+    <ul className="flex flex-col space-y-8">
       {list.map(({ name, href, duration }, index) => (
         <Animation
           asChild

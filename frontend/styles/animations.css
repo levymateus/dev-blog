@@ -1,15 +1,30 @@
 .bounce-left {
-  animation: bounceLeft var(--duration, 1s) forwards;
+  animation: bounceLeft var(--duration, 0.5s) forwards;
   animation-timing-function: ease-in-out;
 }
 
 .bounce-right {
-  animation: bounceRight var(--duration, 1s) forwards;
+  animation: bounceRight var(--duration, 0.5s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.bounce-top {
+  animation: bounceTop var(--duration, 1s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.bounce-bottom {
+  animation: bounceBottom var(--duration, 0.78s) forwards;
   animation-timing-function: ease-in-out;
 }
 
 .blur-in {
-  animation: blurIn var(--duration, 1s) forwards;
+  animation: blurIn var(--duration, 0.5s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.fade-in {
+  animation: fadeIn var(--duration, 0.5s) forwards;
   animation-timing-function: ease-in-out;
 }
 
@@ -31,6 +46,24 @@
   }
 }
 
+@keyframes bounceTop {
+  from {
+    transform: translateY(0)
+  }
+  to {
+    transform: translateY(-80px)
+  }
+}
+
+@keyframes bounceBottom {
+  from {
+    transform: translateY(-80px)
+  }
+  to {
+    transform: translateY(0)
+  }
+}
+
 @keyframes blurIn {
   from {
     filter: blur(0px);
@@ -38,4 +71,9 @@
   to {
     filter: blur(4px);
   }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

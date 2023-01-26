@@ -1,7 +1,6 @@
-import { withErrorBoundary } from "react-error-boundary"
-import ErrorFallback from "@components/Error"
-import Markdown from "@components/Markdown"
 import Heading from "@components/Heading"
+import PostMeta from "@components/PostMeta"
+import Markdown from "@components/Markdown"
 
 const markdownContent = `
 # Title 1 🚀
@@ -30,17 +29,41 @@ A *cat* meow
 * item [@link-3](https://#)
 `
 
-function About() {
-  return (
-    <div className="mt-10">
-      <Heading size="xl">About Me</Heading>
-      <Markdown className="mt-10 fade-in">{markdownContent}</Markdown>
-    </div>
-  );
+
+function Post({ post }) {
+  return <div className="mt-12">
+    <Heading size="xl">{post.title}</Heading>
+    <PostMeta views={post.views} likes={post.likes} date={new Date(post.datetime)} />
+    <Markdown className="mt-10 fade-in">{post.content}</Markdown>
+  </div>
+}
+
+export async function getStaticPaths() {
+  const posts = [
+    { slug: 'slug' }
+  ]
+
+  return {
+    paths: posts.map(({ slug }) => ({
+      params: {
+        slug: slug,
+      },
+    })),
+    fallback: false,
+  }
 }
 
 export async function getStaticProps() {
-  return { props: {} }
+  return { props: {
+      post: {
+        title: 'Lore ipsum dot sit amet.',
+        datetime: new Date().toISOString(),
+        likes: 10,
+        views: 100,
+        content: markdownContent
+      }
+    }
+  }
 }
 
-export default withErrorBoundary(About, { FallbackComponent: ErrorFallback })
+export default Post

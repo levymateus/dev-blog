@@ -10,7 +10,9 @@ function useList(initialState) {
     return newState
   }, [list])
 
-  return [list, { forEach }]
+  const filter = useCallback((callback) => setList(list.filter(callback)), [list])
+
+  return [list, { forEach, filter, set: setList }]
 }
 
 export default useList

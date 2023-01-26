@@ -1,6 +1,6 @@
 
 function If({ stmt, children }) {
-  if (Boolean(stmt)) {
+  if (stmt) {
     return children
   }
   return null
