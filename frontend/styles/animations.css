@@ -1,20 +1,20 @@
 .bounce-left {
-  animation: bounceLeft var(--duration, 0.5s) forwards;
+  animation: bounceLeft var(--duration, 0.35s) forwards;
   animation-timing-function: ease-in-out;
 }
 
 .bounce-right {
-  animation: bounceRight var(--duration, 0.5s) forwards;
+  animation: bounceRight var(--duration, 0.35s) forwards;
   animation-timing-function: ease-in-out;
 }
 
 .bounce-top {
-  animation: bounceTop var(--duration, 1s) forwards;
+  animation: bounceTop var(--duration, 0.35s) forwards;
   animation-timing-function: ease-in-out;
 }
 
 .bounce-bottom {
-  animation: bounceBottom var(--duration, 0.78s) forwards;
+  animation: bounceBottom var(--duration, 0.35s) forwards;
   animation-timing-function: ease-in-out;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .fade-in {
-  animation: fadeIn var(--duration, 0.5s) forwards;
+  animation: fadeIn var(--duration, 0.35s) forwards;
   animation-timing-function: ease-in-out;
 }
 

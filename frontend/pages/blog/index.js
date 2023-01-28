@@ -7,55 +7,85 @@ import Post from "@components/Post"
 import { Search } from "react-feather"
 import useList from "@hooks/useList"
 import usePrevious from "@hooks/usePrevious"
-import If from "@components/If"
 import { useRouter } from "next/router"
 import useStore from "@hooks/useStore"
+import { useState } from "react"
+import clsx from "clsx"
+
+let timeoutId = null
 
 function Blog({ posts: data }) {
-  const [setAppBarIsVisible] = useStore(store => [store.setAppBarIsVisible])
+  const setAppBarIsOpen = useStore(({ setAppBarIsOpen }) => setAppBarIsOpen)
   const [posts, { filter, set: clearFilter }] = useList(data)
+  const [searchIsActive, setSearchIsActive] = useState(false)
+  const [search, setSeach] = useState('')
   const prevPosts = usePrevious(data)
   const router = useRouter()
+
+  function handleChange(evt) {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+
+    if (!evt.target.value) {
+      clearFilter(prevPosts)
+      setSeach('')
+    }
+
+    if (evt.target.value) {
+      timeoutId = setTimeout(() => {
+        filter(({ title }) => title.toLowerCase().includes(evt.target.value.toLowerCase()))
+        setSeach(evt.target.value)
+      }, 500)
+    }
+  }
+
+  function handleFocus() {
+    router.push(`/blog#blog-search`)
+    setSearchIsActive(true)
+  }
+
   return (
     <div className="mt-10">
       <div className="flex flex-col">
-        <Heading size="xl">Blog</Heading>
-        <Text size="md" className="mt-2 fade-in">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae sagittis nisl, nec facilisis velit. Duis eu ex lectus. Nullam neque libero, condimentum eu.
-        </Text>
-        <section
-          id="blog-input-search"
-          className="pt-4"
-        >
-          <InputText
-            className="fade-in"
-          >
+        <section id="blog-search" className="flex flex-col w-full">
+          <Heading size="xl" className={clsx({ "hidden": searchIsActive })}>Blog</Heading>
+          <Text size="md" className={clsx("mt-2 fade-in", { "hidden": searchIsActive })}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae sagittis nisl, nec facilisis velit. Duis eu ex lectus. Nullam neque libero, condimentum eu.
+          </Text>
+          <InputText className="mt-3">
             <Input.Input
               type="text"
+              id="blog-input-search"
               placeholder="Search"
-              onChange={(evt) => {
-                if (evt.target.value !== '') {
-                  filter(({ title }) => title.toLowerCase().includes(evt.target.value.toLowerCase()))
-                } else {
-                  clearFilter(prevPosts)
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={(evt) => {
+                window.scroll({ top: 0 })
+                if (!evt.target.value) {
+                  setSearchIsActive(false)
                 }
-              }}
-              onFocus={() => {
-                router.push(`/blog#blog-input-search`)
-                setAppBarIsVisible(false)
               }}
             />
             <Input.Icon icon={Search} />
           </InputText>
+          <Text
+            size="sm"
+            variant="neutral"
+            className={clsx(" fade-in", { "hidden": !search || !posts.length })}
+            asChild
+          >
+            <span className="italic mx-1">Results for: {search} ({posts.length})</span>
+          </Text>
         </section>
-        <section className="flex flex-col mt-14 space-y-8 fade-in">
-          <Heading size="xl" className="fade-in">All Posts</Heading>
-          <If stmt={posts.length <= 0}>
-            <Text >No results!</Text>
-          </If>
-          <If stmt={posts.length > 0}>
+        <section id="blog-all-posts" className="flex flex-col mt-14 fade-in">
+          <Heading size="xl" className={clsx("fade-in mb-8", { "hidden": search })}>
+            All Posts
+          </Heading>
+          <Text className={clsx({ "hidden": posts.length })}>No results!</Text>
+          <div className={clsx("space-y-7", { "hidden": !posts.length })}>
             {posts.map(({ slug, date, ...postProps }) => <Post key={slug} slug={slug} date={new Date(date)} {...postProps} />)}
-          </If>
+          </div>
         </section>
       </div>
     </div>

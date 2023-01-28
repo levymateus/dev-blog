@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 
-function useEventListener(eventName, handler, element = globalThis) {
+function useEventListener(eventName, handler, opts, element = globalThis) {
   const savedHandler = useRef()
 
   useEffect(() => {
@@ -12,12 +12,12 @@ function useEventListener(eventName, handler, element = globalThis) {
       const isSupported = element && element.addEventListener;
       if (!isSupported) return
       const eventListener = (event) => savedHandler.current(event)
-      element.addEventListener(eventName, eventListener)
+      element.addEventListener(eventName, eventListener, opts)
       return () => {
         element.removeEventListener(eventName, eventListener)
       }
     },
-    [eventName, element]
+    [eventName, element, opts]
   )
 
 }

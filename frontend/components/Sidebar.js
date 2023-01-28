@@ -12,6 +12,7 @@ const items = [
   { href: '/about', name: 'About', duration: 0.6 },
   { href: '/#contact', name: 'Contact', duration: 0.8 },
   { href: '/snippets', name: 'Snippets', duration: 1.0 },
+  { href: '/blog', name: 'Blog', duration: 1.2 }
 ]
 
 function Sidebar({ onSelectItem }) {

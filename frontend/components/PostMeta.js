@@ -8,7 +8,7 @@ function PostMeta({ views, likes, date }) {
       <Likes count={likes} />
       <Views count={views} />
     </div>
-    <DateText date={date} size="lg" />
+    <DateText date={date} />
   </div>
 }
 

@@ -20,16 +20,17 @@ function Footer() {
       </ul>
       <ul className="flex flex-col">
         <NavLink href="/snippets">Snippets</NavLink>
+        <NavLink href="/blog">Blog</NavLink>
       </ul>
       <ul className="flex flex-col">
         <NavLink href="https://github.com/levymateus" target="__blank">
-          <span className="text-black hover:text-indigo-600 dark:hover:text-white dark:text-neutral-500 flex items-center spacing-y-1">
-            <GitHub width={14} height={14} /> Github
+          <span className="text-black hover:text-indigo-600 dark:hover:text-white dark:text-neutral-500 flex items-center">
+            <GitHub width={14} height={14} /> <span className="pl-1">Github</span>
           </span>
         </NavLink>
         <NavLink href="/twitter">
-          <span className="text-black hover:text-indigo-600 dark:hover:text-white dark:text-neutral-500 flex items-center spacing-y-1">
-            <Twitter width={14} height={14} /> Twitter
+          <span className="text-black hover:text-indigo-600 dark:hover:text-white dark:text-neutral-500 flex items-center">
+            <Twitter width={14} height={14} /> <span className="pl-1">Twitter</span>
           </span>
         </NavLink>
       </ul>

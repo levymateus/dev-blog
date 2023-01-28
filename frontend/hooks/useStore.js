@@ -2,9 +2,9 @@ import create from "zustand"
 
 const useStore = create(set => ({
   sidebarIsOpen: false,
-  appBarIsVisible: true,
+  appBarIsOpen: true,
   setSidebarOpen: (isOpen) => set(() => ({ sidebarIsOpen: isOpen })),
-  setAppBarIsVisible: (isVisible) => set(() => ({ appBarIsVisible: isVisible }))
+  setAppBarIsOpen: (isOpen) => set(() => ({ appBarIsOpen: isOpen }))
 }))
 
 export default useStore
