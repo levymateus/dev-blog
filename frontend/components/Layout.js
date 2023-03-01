@@ -5,8 +5,10 @@ import Sidebar from "@components/Sidebar"
 import Animation from "@components/Animation"
 import useEventListener from "@hooks/useEventListener"
 import clsx from "clsx"
+import useStore from "@hooks/useStore"
 
 function Layout({ children }) {
+  const appBarState = useStore(({ appBarState }) => appBarState)
   const [animation, setAnimation] = useState()
 
   function handleToggleMenu(isOpen) {
@@ -15,16 +17,12 @@ function Layout({ children }) {
 
   useEventListener("resize", () => setAnimation())
 
-  return <div className="container flex flex-col overflow-x-hidden sm:overflow-clip px-4 mt-[80px] mb-14 mx-auto sm:max-w-screen-md">
+  return <div className={clsx("container flex flex-col overflow-x-hidden sm:overflow-clip px-4 mb-14 mt-[80px] mx-auto sm:max-w-screen-md")}>
 
-    <div className="relative">
-      <AppBar onToggleMenu={handleToggleMenu} />
-    </div>
+    <AppBar onToggleMenu={handleToggleMenu} />
 
-    <div className="relative">
-      <div className="fixed top-[104px] left-0 right-0 px-4 bg-white dark:bg-black z-10">
-        <Sidebar onSelectItem={() => setAnimation("bounce-left")} />
-      </div>
+    <div className="fixed top-[104px] left-0 right-0 px-4 bg-white dark:bg-black z-10">
+      <Sidebar onSelectItem={() => setAnimation("bounce-left")} />
     </div>
 
     <Animation
@@ -35,7 +33,7 @@ function Layout({ children }) {
       to={animation === 'bounce-right' ? "156px" : "0px"}
     >
 
-      <div>
+      <div className="relative">
         <main className={clsx("sm:w-full overflow-clip")}>
           {children}
         </main>

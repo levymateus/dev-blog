@@ -4,7 +4,8 @@
   "info": {
     "singularName": "snippet",
     "pluralName": "snippets",
-    "displayName": "Snippet"
+    "displayName": "Snippet",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,16 +22,20 @@
       "required": true
     },
     "image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": false
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "text": {
       "type": "richtext",
       "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

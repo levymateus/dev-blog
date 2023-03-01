@@ -1,67 +1,49 @@
 import Heading from "@components/Heading"
 import PostMeta from "@components/PostMeta"
 import Markdown from "@components/Markdown"
-
-const markdownContent = `
-# Title 1 🚀
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non leo pharetra.
-## Title 2
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non leo pharetra.
-### Title 3
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non leo pharetra.
-#### Title 4
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non leo pharetra.
-##### Title 5
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non leo pharetra. [link](https://#)
-
-This text is ***really important***.
-
-This text is **_really important_**.
-
-A *cat* meow
-
-- item [@link-1](https://#)
-- item [@link-2](https://#)
-- item [@link-3](https://#)
-
-* item [@link-1](https://#)
-* item [@link-2](https://#)
-* item [@link-3](https://#)
-`
-
+import { fetchAPI } from "lib/api"
+import { useRouter } from "next/router"
+import Breadcumb from "@components/Breadcumb"
+import { minToMs } from "@utils/time"
+import useTimeout from "@hooks/useTimeout"
+import usePost from "@hooks/usePost"
 
 function Post({ post }) {
-  return <div className="mt-12">
-    <Heading size="xl">{post.title}</Heading>
-    <PostMeta views={post.views} likes={post.likes} date={new Date(post.datetime)} />
-    <Markdown className="mt-10 fade-in">{post.content}</Markdown>
+  const router = useRouter()
+  const slug = router.query.slug
+  const [, { visualize }] = usePost(slug)
+
+  useTimeout(() => visualize(), minToMs(1))
+
+  return <div className="flex flex-col mt-12">
+    <Breadcumb />
+    <Heading size="xl" className="mt-12">{post.title}</Heading>
+    <PostMeta
+      slug={slug}
+      date={new Date(post.publishedAt)}
+    />
+    <Markdown className="mt-10 fade-in">{post.text}</Markdown>
   </div>
 }
 
 export async function getStaticPaths() {
-  const posts = [
-    { slug: 'slug' }
-  ]
-
+  const posts = await fetchAPI("/posts?populate=*");
   return {
-    paths: posts.map(({ slug }) => ({
+    paths: posts?.data?.map(({ attributes }) => ({
       params: {
-        slug: slug,
+        slug: attributes.slug,
       },
     })),
     fallback: false,
   }
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
+  const data = await fetchAPI(`/posts?filters[slug][$eq]=${context.params.slug}`);
   return { props: {
       post: {
-        title: 'Lore ipsum dot sit amet.',
-        datetime: new Date().toISOString(),
-        likes: 10,
-        views: 100,
-        content: markdownContent
-      }
+        ...data.data[0].attributes,
+      },
     }
   }
 }

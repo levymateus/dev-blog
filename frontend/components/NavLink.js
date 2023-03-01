@@ -8,13 +8,14 @@ function NavLink({
   href,
   children = '',
   size = 'xl',
+  accessKey,
   ...props
 }) {
-  const { route } = useRouter()
-  return <Link href={href} {...props} passHref>
+  const { asPath, route } = useRouter()
+  return <Link href={href} accessKey={accessKey} {...props} passHref>
     <Text
-      className={clsx("hover:underline px-4 py-2", {
-        'font-bold': route === href
+      className={clsx("px-4 py-2", {
+        'font-bold text-blue-600 dark:text-teal-500': route === href || asPath === href
       })}
       size={size}
     >{children}</Text>

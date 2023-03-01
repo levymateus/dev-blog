@@ -1,40 +1,29 @@
 import { HiHeart, HiOutlineHeart } from "react-icons/hi"
-import useCounter from "@hooks/useCounter"
-import Toogle from "@components/Toggle"
+import usePost from "@hooks/usePost"
 
-function Likes({ count: initialState, size = 'base', }) {
-  const { count, increment, decrement } = useCounter(initialState)
+function Likes({ slug }) {
+  const [{ liked }, { like, dislike }] = usePost(slug)
+
   return <div className="flex items-center">
-    <Toogle defaultValue={false}>
-      <Toogle.On>
-        {(toggle) => <button
-            type="button"
-            onClick={() => {
-              decrement()
-              toggle()
-            }}
-          >
-            <div className="flex items-center">
-              <HiHeart className="text-red-700" />
-              <span className={`text-${size} pl-1`}>{count} {count <= 1 ? 'like' : 'likes'}</span>
-            </div>
-          </button>}
-      </Toogle.On>
-      <Toogle.Off>
-        {(toggle) => <button
-            type="button"
-            onClick={() => {
-              increment()
-              toggle()
-            }}
-          >
-            <div className="flex items-center">
-              <HiOutlineHeart />
-              <span className={`text-${size} pl-1`}>{count} {count <= 1 ? 'like' : 'likes'}</span>
-            </div>
-          </button>}
-      </Toogle.Off>
-    </Toogle>
+    {liked ?
+      <button
+        type="button"
+        className="hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded p-1 outline-0"
+        onClick={() => dislike()}
+      >
+        <div className="flex items-center">
+          <HiHeart className="text-red-700" />
+        </div>
+      </button> :
+      <button
+        type="button"
+        className="hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded p-1 outline-0"
+        onClick={() => like()}
+      >
+        <div className="flex items-center">
+          <HiOutlineHeart />
+        </div>
+      </button>}
   </div>
 }
 

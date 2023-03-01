@@ -1,7 +1,7 @@
 {
   "collectionName": "components_links_socials",
   "info": {
-    "displayName": "social",
+    "displayName": "media",
     "icon": "at",
     "description": ""
   },
@@ -18,21 +18,8 @@
     "icon": {
       "type": "enumeration",
       "enum": [
-        "GithubFilled",
-        "LinkedinFilled",
-        "CodeSandboxCircleFilled",
-        "FacebookFilled",
-        "InstagramFilled",
-        "CodepenCircleFilled",
-        "CodeSandboxSquareFilled",
-        "SlackSquareFilled",
-        "DribbbleCircleFilled",
-        "TwitterCircleFilled",
-        "TwitterSquareFilled",
-        "RedditCircleFilled",
-        "RedditSquareFilled",
-        "CodeFilled",
-        "CodepenSquareFilled"
+        "GitHub",
+        "Twitter"
       ]
     }
   }

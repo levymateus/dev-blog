@@ -2,9 +2,9 @@ import Link from "next/link"
 import { GitHub, Twitter } from "react-feather"
 import Text from "@components/Text"
 
-function NavLink({ href, children }) {
+function NavLink({ href, children, ...props }) {
   return <li className="my-2">
-    <Link href={href} passHref>
+    <Link href={href} {...props} passHref>
       <span className="text-black hover:text-indigo-600 dark:hover:text-white dark:text-neutral-500">{children}</span>
     </Link>
   </li>

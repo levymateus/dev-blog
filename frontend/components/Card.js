@@ -6,22 +6,30 @@ import Stepper from "@components/Stepper"
 import TextArea from "@components/TextArea"
 import { ArrowRight } from "react-feather"
 import { useRouter } from "next/router"
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
+import { X } from "react-feather"
 import useStore from "@hooks/useStore"
+import clsx from "clsx"
 
 function Card() {
   const emailInputRef = useRef()
-  const values = useRef(new Map())
+  const [values, setValues] = useState({ text: '', email: '' })
   const router = useRouter()
   const hash = router.asPath.split('#')[1]
-  const [setAppBarIsVisible] = useStore(store => [store.setAppBarIsVisible])
+  const setAppBarIsOpen = useStore(({ setAppBarIsOpen }) => setAppBarIsOpen)
+
+  function handleInputChange(evt) {
+    setValues(prevValues => ({
+      ...prevValues,
+      [evt.target.name]: evt.target.value
+    }))
+  }
 
   useEffect(() => {
     if (hash === 'contact' && emailInputRef.current) {
       emailInputRef.current.focus()
-      setAppBarIsVisible(false)
     }
-  }, [hash, setAppBarIsVisible])
+  }, [hash, setAppBarIsOpen])
 
   return <div className="flex flex-col rounded bg-cyan-100 bg-rw-rw px-3 py-5">
 
@@ -31,24 +39,14 @@ function Card() {
     <Stepper
       maxSteps={2}
       onComplete={() => {
-        console.log('email', values.current.get('email'))
-        console.log('text', values.current.get('text'))
+        console.log('email', values['email'])
+        console.log('text', values['text'])
       }}
     >
       {({ step, next }) => <form
         onSubmit={(evt) => {
           evt.preventDefault()
           if (evt.target.checkValidity()) {
-            const formData = new FormData(evt.target)
-
-            if (formData.get('email')) {
-              values.current.set('email', formData.get('email'))
-            }
-
-            if (formData.get('text')) {
-              values.current.set('text', formData.get('text'))
-            }
-
             next()
           } else {
             evt.target.reportValidity()
@@ -58,11 +56,40 @@ function Card() {
         <div action="post" className="mt-8">
           <Stepper.Step num={1}>
             <InputText>
-              <Input.Input ref={emailInputRef} name="email" type="email" required placeholder="you-email@email.com" />
+              <Input.Input
+                ref={emailInputRef}
+                name="email"
+                type="email"
+                onChange={handleInputChange}
+                blurHotkey="Escape"
+                value={values['email']}
+                accessKey="c"
+                required
+                placeholder="you-email@email.com"
+              />
+              <Input.Icon
+                className={clsx("hover:cursor-pointer", {
+                  "visible": values['email'],
+                  "invisible": !values['email']
+                })}
+                onClick={() => setValues(prevValues => ({
+                  ...prevValues,
+                  email: ''
+                }))}
+                icon={X}
+              />
             </InputText>
           </Stepper.Step>
           <Stepper.Step num={2}>
-            <TextArea autoFocus name="text" type="message" required rows={3} placeholder="text" />
+            <TextArea
+              autoFocus
+              name="text"
+              type="message"
+              onChange={handleInputChange}
+              required
+              rows={3}
+              placeholder="text"
+            />
           </Stepper.Step>
         </div>
 

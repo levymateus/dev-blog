@@ -2,27 +2,25 @@ import { withErrorBoundary } from "react-error-boundary"
 import ErrorFallback from "@components/Error"
 import Heading from "@components/Heading"
 import Markdown from "@components/Markdown"
+import { fetchAPI } from "lib/api"
 import Text from "@components/Text"
 
-function Snippet({ title, content }) {
+function Snippet({ title, description, text }) {
   return <div className="mt-12">
     <div className="flex flex-col">
       <Heading size="xl">{title}</Heading>
-      <Text size="md" className="mt-2 mb-4 fade-in">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae sagittis nisl, nec facilisis velit. Duis eu ex lectus. Nullam neque libero, condimentum eu.
-      </Text>
+      <Text size="md" className="mt-2 mb-4 fade-in">{description}</Text>
     </div>
-    <Markdown className="mt-10 fade-in">{content}</Markdown>
+    <Markdown className="mt-10 fade-in">{text}</Markdown>
   </div>
 }
 
 export async function getStaticPaths() {
-  const snippets = [
-    { slug: 'slug' }
-  ]
-
+  const data = (await fetchAPI("/snippets"))?.data.map(({ attributes }) => ({
+    ...attributes,
+  }));
   return {
-    paths: snippets.map(({ slug }) => ({
+    paths: data.map(({ slug }) => ({
       params: {
         slug: slug,
       },
@@ -31,11 +29,11 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
+  const data = await fetchAPI(`/snippets?filters[slug][$eq]=${context.params.slug}`);
   return {
     props: {
-      title: 'Lore ipsum.',
-      content: ''
+      ...data.data[0].attributes,
     }
   }
 }

@@ -14,8 +14,21 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "default": "Blog title"
+      "required": false
+    },
+    "blog": {
+      "type": "text",
+      "required": true
+    },
+    "bio": {
+      "type": "component",
+      "repeatable": false,
+      "component": "info.bio"
+    },
+    "footer": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.social"
     }
   }
 }

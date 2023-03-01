@@ -1,3 +1,4 @@
+import useEventListener from "@hooks/useEventListener"
 import { Moon, Sun, Menu, X } from "react-feather"
 import useScroll from "@hooks/useScroll"
 import NavLink from "@components/NavLink"
@@ -6,8 +7,8 @@ import Button from "@components/Button"
 import useTheme from "@hooks/useTheme"
 import useStore from "@hooks/useStore"
 import If from "@components/If"
-import { useDebugValue, useEffect, useState } from "react"
 import clsx from "clsx"
+import { useState } from "react"
 
 function HamburgerMenu({ onToggleMenu }) {
   const [sidebarIsOpen, setSidebarOpen] = useStore(({ sidebarIsOpen, setSidebarOpen }) => [sidebarIsOpen, setSidebarOpen])
@@ -39,12 +40,12 @@ function ThemeToggle() {
   return <If stmt={theme}>
     <Toggle defaultValue={theme === 'light'}>
       <Toggle.On>
-        {(off) => <Button onClick={() => { setAsDark(); off() }}>
+        {(off) => <Button accessKey="l" onClick={() => { setAsDark(); off() }}>
           <Moon />
         </Button>}
       </Toggle.On>
       <Toggle.Off>
-        {(on) => <Button onClick={() => { setAsLight(); on() }}>
+        {(on) => <Button accessKey="l" onClick={() => { setAsLight(); on() }}>
           <Sun />
         </Button>}
       </Toggle.Off>
@@ -53,10 +54,8 @@ function ThemeToggle() {
 }
 
 function AppBar({ onToggleMenu }) {
-  const [appBarIsOpen, setAppBarIsOpen] = useStore(({ appBarIsOpen, setAppBarIsOpen }) => [appBarIsOpen, setAppBarIsOpen])
   const [appBarState, setAppBarState] = useState('')
-
-  useDebugValue(appBarIsOpen, (value) => value ? 'open' : 'closed')
+  const [isAltKeyPressed, setAltKeyIsPressed] = useState(false)
 
   useScroll('on-scroll-down', () => {
     setAppBarState('bounce-top')
@@ -70,25 +69,39 @@ function AppBar({ onToggleMenu }) {
     setAppBarState('bounce-bottom')
   })
 
-  useEffect(() => {
-    () => setAppBarIsOpen(false)
-  }, [setAppBarIsOpen])
+  useEventListener('keydown', (evt) => {
+    setAltKeyIsPressed(evt.altKey)
+  })
+
+  useEventListener('keyup', (evt) => {
+    setAltKeyIsPressed(evt.altKey)
+  })
 
   return <>
-    <div className={clsx("fixed top-0 left-0 right-0 pt-8 pb-2 px-4 mx-auto sm:max-w-screen-md bg-white dark:bg-black z-10", { "hidden": !appBarIsOpen }, appBarState)}>
-      <header className="flex grow flex-row items-center place-content-between">
+    <div className={clsx("fixed top-0 left-0 right-0 px-4 mx-auto sm:max-w-screen-md bg-white dark:bg-black z-10", appBarState)}>
+      <div className="flex flex-row items-center pt-8 pb-2 place-content-between relative">
         <div className="visible sm:hidden">
           <HamburgerMenu onToggleMenu={onToggleMenu} />
         </div>
-        <div className="invisible sm:visible flex flex-row">
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/snippets">Snippets</NavLink>
+        <div className="hidden sm:flex flex-row">
+          <NavLink accessKey="h" href="/">
+            {isAltKeyPressed ? <><span className="underline underline-offset-4">H</span>ome</> : 'Home'}
+          </NavLink>
+          <NavLink accessKey="g" href="/blog">
+            {isAltKeyPressed ? <>Blo<span className="underline underline-offset-4">g</span></> : 'Blog'}
+          </NavLink>
+          <NavLink accessKey="s" href="/snippets">
+            {isAltKeyPressed ? <><span className="underline underline-offset-4">S</span>nnipets</> : 'Snnipets'}
+          </NavLink>
+          <NavLink accessKey="c" href="/#contact">
+            {isAltKeyPressed ? <><span className="underline underline-offset-4">C</span>ontact</> : 'Contact'}
+          </NavLink>
+          <NavLink accessKey="u" href="/about">
+            {isAltKeyPressed ? <>Abo<span className="underline underline-offset-4">u</span>t</> : 'About'}
+          </NavLink>
         </div>
-        <div className="visible sm:visible flex">
-          <ThemeToggle />
-        </div>
-      </header>
+        <ThemeToggle />
+      </div>
     </div>
   </>
 }

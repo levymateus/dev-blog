@@ -2,48 +2,19 @@ import { withErrorBoundary } from "react-error-boundary"
 import ErrorFallback from "@components/Error"
 import Heading from "@components/Heading"
 import Text from "@components/Text"
-import InputText, { Input } from "@components/Input"
 import Post from "@components/Post"
-import { Search } from "react-feather"
 import useList from "@hooks/useList"
 import usePrevious from "@hooks/usePrevious"
-import { useRouter } from "next/router"
-import useStore from "@hooks/useStore"
 import { useState } from "react"
 import clsx from "clsx"
+import InputSeach from "@components/InputSearch"
+import { fetchAPI } from "lib/api"
 
-let timeoutId = null
-
-function Blog({ posts: data }) {
-  const setAppBarIsOpen = useStore(({ setAppBarIsOpen }) => setAppBarIsOpen)
+function Blog({ posts: data, blog }) {
   const [posts, { filter, set: clearFilter }] = useList(data)
   const [searchIsActive, setSearchIsActive] = useState(false)
   const [search, setSeach] = useState('')
   const prevPosts = usePrevious(data)
-  const router = useRouter()
-
-  function handleChange(evt) {
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
-
-    if (!evt.target.value) {
-      clearFilter(prevPosts)
-      setSeach('')
-    }
-
-    if (evt.target.value) {
-      timeoutId = setTimeout(() => {
-        filter(({ title }) => title.toLowerCase().includes(evt.target.value.toLowerCase()))
-        setSeach(evt.target.value)
-      }, 500)
-    }
-  }
-
-  function handleFocus() {
-    router.push(`/blog#blog-search`)
-    setSearchIsActive(true)
-  }
 
   return (
     <div className="mt-10">
@@ -51,24 +22,18 @@ function Blog({ posts: data }) {
         <section id="blog-search" className="flex flex-col w-full">
           <Heading size="xl" className={clsx({ "hidden": searchIsActive })}>Blog</Heading>
           <Text size="md" className={clsx("mt-2 fade-in", { "hidden": searchIsActive })}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae sagittis nisl, nec facilisis velit. Duis eu ex lectus. Nullam neque libero, condimentum eu.
+            {blog}
           </Text>
-          <InputText className="mt-3">
-            <Input.Input
-              type="text"
-              id="blog-input-search"
-              placeholder="Search"
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={(evt) => {
-                window.scroll({ top: 0 })
-                if (!evt.target.value) {
-                  setSearchIsActive(false)
-                }
-              }}
-            />
-            <Input.Icon icon={Search} />
-          </InputText>
+          <InputSeach
+            value={search}
+            setValue={setSeach}
+            setActive={setSearchIsActive}
+            onCancel={() => clearFilter(prevPosts)}
+            onChange={(evt) => {
+              filter(({ attributes }) => attributes.title.toLowerCase().includes(evt.target.value.toLowerCase()))
+              setSeach(evt.target.value)
+            }}
+          />
           <Text
             size="sm"
             variant="neutral"
@@ -84,7 +49,15 @@ function Blog({ posts: data }) {
           </Heading>
           <Text className={clsx({ "hidden": posts.length })}>No results!</Text>
           <div className={clsx("space-y-7", { "hidden": !posts.length })}>
-            {posts.map(({ slug, date, ...postProps }) => <Post key={slug} slug={slug} date={new Date(date)} {...postProps} />)}
+            {posts.map(({ views, likes, attributes }) => <Post
+              key={attributes.slug}
+              views={views}
+              likes={likes}
+              slug={attributes.slug}
+              title={attributes.title}
+              shortText={attributes.description}
+              date={new Date(attributes.publishedAt)}
+            />)}
           </div>
         </section>
       </div>
@@ -93,15 +66,16 @@ function Blog({ posts: data }) {
 }
 
 export async function getStaticProps() {
+  const posts = await fetchAPI("/posts?populate=*")
+  const global = await fetchAPI("/global?populate=*")
   return {
     props: {
-      posts: [
-        { slug: 'slug', title: 'A test', shortText: 'test', date: new Date().toISOString(), views: 10, likes: 10 },
-        { slug: 'slug', title: 'B test', shortText: 'test', date: new Date().toISOString(), views: 10, likes: 10 },
-        { slug: 'slug', title: 'C test', shortText: 'test', date: new Date().toISOString(), views: 10, likes: 10 },
-        { slug: 'slug', title: 'D test', shortText: 'test', date: new Date().toISOString(), views: 10, likes: 10 },
-        { slug: 'slug', title: 'E test', shortText: 'test', date: new Date().toISOString(), views: 10, likes: 10 }
-      ]
+      blog: global?.data?.attributes.blog,
+      posts: posts?.data.map((props) => ({
+        ...props,
+        views: 1,
+        likes: 1,
+      }))
     }
   }
 }

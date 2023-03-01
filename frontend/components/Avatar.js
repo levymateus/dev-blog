@@ -1,13 +1,15 @@
 import clsx from "clsx"
 import Image from "next/image"
 
-function Avatar({ className, src }) {
+function Avatar({ className, src, alt, ...props }) {
   return <Image
-    className={clsx(className, "rounded-full w-32 h-32")}
+    className={clsx(className, "rounded-full h-32")}
     width={128}
     height={128}
-    alt="avatar"
     src={src}
+    alt={alt}
+    priority
+    {...props}
   />
 }
 

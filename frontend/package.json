@@ -12,6 +12,7 @@
     "@next/bundle-analyzer": "^12.1.4",
     "@radix-ui/react-slot": "^1.0.1",
     "clsx": "^1.2.1",
+    "firebase": "^9.17.1",
     "highlight.js": "^11.6.0",
     "marked": "^4.0.12",
     "next": "^13.0.2",

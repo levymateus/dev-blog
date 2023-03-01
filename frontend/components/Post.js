@@ -9,11 +9,10 @@ export default function Post({
   title = '',
   shortText = '',
   date = new Date(),
-  views = 0,
-  likes = 0,
+  views = 1,
+  likes = 1,
   slug = ''
 }) {
-
   return <div className="flex flex-col space-y-3">
     <Link href={`blog/${slug}`} passHref className="w-fit">
       <Heading>{title}</Heading>
@@ -25,9 +24,9 @@ export default function Post({
     </Link>
     <div className="flex flex-row">
       <DateText date={date} />
-      <div className="flex flex-row text-gray-700 dark:text-gray-500 space-x-3 ml-10 hover:cursor-default">
-        <Views count={views} size="sm" />
-        <Likes count={likes} size="sm" />
+      <div className="flex flex-row text-gray-700 dark:text-gray-500 space-x-2 ml-10 hover:cursor-default">
+        <Views slug={slug} count={views} size="sm" />
+        <Likes slug={slug} count={likes} size="sm" />
       </div>
     </div>
   </div>

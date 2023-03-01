@@ -5,7 +5,7 @@ function DateText({ date = new DateText(), size = "sm" }) {
     dateStyle: 'medium',
   })
   return <Text variant="neutral" size={size}>
-    <span className="italic hover:cursor-default">
+    <span className="p-1 flex italic hover:cursor-default">
       {datetimeformat.format(date)}
     </span>
   </Text>
