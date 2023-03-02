@@ -1,5 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { doc, getDoc, getFirestore, updateDoc, increment, setDoc } from "firebase/firestore"
+import { FirebaseError, initializeApp } from "firebase/app";
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
+import { doc, getDoc, getFirestore, updateDoc, increment, setDoc, arrayUnion, serverTimestamp } from "firebase/firestore"
 
 export const config = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -13,8 +14,49 @@ export const config = {
 const app = initializeApp(config)
 const firestore = getFirestore(app)
 
+export const user = () => {
+  const coll = process.env.NODE_ENV === 'development' ? 'users-dev' : 'users'
+
+  async function getUserVisitorId() {
+    const fp = await FingerprintJS.load()
+    const { visitorId } = await fp.get()
+    return visitorId
+  }
+
+  return {
+    set: {
+      post: function(slug) {
+        return {
+          like: async function() {
+            const id = await getUserVisitorId()
+            return await setDoc(doc(firestore, coll, id), {
+              [slug]: { isLiked: true, updated: serverTimestamp() }
+            }, { merge: true })
+          },
+          dislike: async function() {
+            const id = await getUserVisitorId()
+            return await setDoc(doc(firestore, coll, id), {
+              [slug]: { isLiked: false, updated: serverTimestamp() }
+            }, { merge: true })
+          }
+        }
+      }
+    },
+    get: {
+      post: function(slug) {
+        return {
+          isLiked: async function() {
+            const id = await getUserVisitorId()
+            return await (await getDoc(doc(firestore, coll, id))).get(slug)
+          }
+        }
+      }
+    }
+  }
+}
+
 const post = (slug) => {
-  const coll = process.env.NODE_ENV === 'development' ? 'dev-blog' : 'blog'
+  const coll = process.env.NODE_ENV === 'development' ? 'posts-dev' : 'posts'
   return {
     get: {
       views: {

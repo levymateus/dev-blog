@@ -4,7 +4,6 @@ import Markdown from "@components/Markdown"
 import { fetchAPI } from "lib/api"
 import { useRouter } from "next/router"
 import Breadcumb from "@components/Breadcumb"
-import { minToMs } from "@utils/time"
 import useTimeout from "@hooks/useTimeout"
 import usePost from "@hooks/usePost"
 
@@ -13,7 +12,7 @@ function Post({ post }) {
   const slug = router.query.slug
   const [, { visualize }] = usePost(slug)
 
-  useTimeout(() => visualize(), minToMs(1))
+  useTimeout(() => visualize(), 3)
 
   return <div className="flex flex-col mt-12">
     <Breadcumb />

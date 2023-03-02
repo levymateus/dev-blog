@@ -1,20 +1,31 @@
 import { useCallback, useEffect, useState } from "react"
 import useLocalStorage from "@hooks/useLocalStorage"
 import useSessionStorage from "@hooks/useSessionStorage"
-import { blog } from "@lib/database"
+import { blog, user } from "@lib/database"
 import { msToHours } from "@utils/time"
 import useIsMounted from "@hooks/useIsMounted"
 
 
 export default function usePost(slug) {
+  const [isLoading, setIsLoading] = useState(true)
   const [liked, setLiked] = useLocalStorage(slug, false)
   const [visited, setVisited] = useSessionStorage(slug, null)
   const [views, setViews] = useState(1)
   const isMounted = useIsMounted()
 
-  const like = useCallback(() => setLiked(true), [setLiked])
+  const like = useCallback(() => {
+    (async function() {
+      setLiked(true)
+      await user().set.post(slug).like()
+    })()
+  }, [setLiked, slug])
 
-  const dislike = useCallback(() => setLiked(false), [setLiked])
+  const dislike = useCallback(() => {
+    (async function() {
+      setLiked(false)
+      await user().set.post(slug).dislike()
+    })()
+  }, [setLiked, slug])
 
   const visualize = useCallback(() => {
     async function visualizePost() {
@@ -34,13 +45,15 @@ export default function usePost(slug) {
   }, [isMounted, visited, setVisited, slug])
 
   useEffect(() => {
-    async function getPostData() {
+    async function fetchPost() {
       if (isMounted()) {
         setViews(await blog.post(slug).get.views.data())
+        setLiked(await user().get.post(slug).isLiked())
+        setIsLoading(false)
       }
     }
-    getPostData()
-  }, [slug, isMounted])
+    fetchPost()
+  }, [slug, isMounted, setLiked])
 
-  return [{ liked, views }, { like, dislike, visualize }]
+  return [{ liked, views, isLoading }, { like, dislike, visualize }]
 }
