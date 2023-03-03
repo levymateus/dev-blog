@@ -1,15 +1,14 @@
 import { useCallback, useEffect, useState } from "react"
-import useLocalStorage from "@hooks/useLocalStorage"
 import useSessionStorage from "@hooks/useSessionStorage"
 import { blog, user } from "@lib/database"
 import { msToHours } from "@utils/time"
 import useIsMounted from "@hooks/useIsMounted"
-
+import useIsLoading from "./useIsLoading"
 
 export default function usePost(slug) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [liked, setLiked] = useLocalStorage(slug, false)
+  const [liked, setLiked] = useState(false)
   const [visited, setVisited] = useSessionStorage(slug, null)
+  const { isLoading, setIsLoading } = useIsLoading()
   const [views, setViews] = useState(1)
   const isMounted = useIsMounted()
 
@@ -53,7 +52,7 @@ export default function usePost(slug) {
       }
     }
     fetchPost()
-  }, [slug, isMounted, setLiked])
+  }, [slug, isMounted, setLiked, setIsLoading])
 
   return [{ liked, views, isLoading }, { like, dislike, visualize }]
 }

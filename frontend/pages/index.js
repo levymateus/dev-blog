@@ -36,24 +36,23 @@ const HomePage = ({ bio, posts }) => {
           <h3>Featured Posts</h3>
         </Heading>
         <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-7 mt-6 fade-in">
-          <PostCard slug={posts[0]?.attributes.slug} color="teal">
-            <Link href={`/blog/${posts[0]?.attributes.slug}`} passHref>
-              <Text size="xl">{posts[0]?.attributes.description}</Text>
-            </Link>
-          </PostCard>
+          <PostCard
+            slug={posts[0]?.attributes.slug}
+            description={posts[0]?.attributes.description} color="teal"
+          />
           <If stmt={posts.length >= 2}>
-            <PostCard slug={posts[1]?.attributes.slug} color="indigo">
-              <Link href={`/blog/${posts[1]?.attributes.slug}`} passHref>
-                <Text size="xl">{posts[1]?.attributes.description}</Text>
-              </Link>
-            </PostCard>
+            <PostCard
+              slug={posts[1]?.attributes.slug}
+              description={posts[1]?.attributes.description}
+              color="indigo"
+            />
           </If>
           <If stmt={posts.length >= 3}>
-            <PostCard slug={posts[2]?.attributes.slug} color="purple">
-              <Link href={`/blog/${posts[2]?.attributes.slug}`} passHref>
-                <Text size="xl">{posts[2]?.attributes.description}</Text>
-              </Link>
-            </PostCard>
+            <PostCard
+              slug={posts[2]?.attributes.slug}
+              description={posts[2]?.attributes.description}
+              color="purple"
+            />
           </If>
         </div>
         <Link className="text-neutral-500" href="/blog" passHref>

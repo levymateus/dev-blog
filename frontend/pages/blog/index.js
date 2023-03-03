@@ -49,10 +49,8 @@ function Blog({ posts: data, blog }) {
           </Heading>
           <Text className={clsx({ "hidden": posts.length })}>No results!</Text>
           <div className={clsx("space-y-7", { "hidden": !posts.length })}>
-            {posts.map(({ views, likes, attributes }) => <Post
+            {posts.map(({ attributes }) => <Post
               key={attributes.slug}
-              views={views}
-              likes={likes}
               slug={attributes.slug}
               title={attributes.title}
               shortText={attributes.description}
@@ -73,8 +71,6 @@ export async function getStaticProps() {
       blog: global?.data?.attributes.blog,
       posts: posts?.data.map((props) => ({
         ...props,
-        views: 1,
-        likes: 1,
       }))
     }
   }

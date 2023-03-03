@@ -41,4 +41,13 @@
   color: white;
 }
 
+.skeleton-text {
+  width: 75%;
+  height: 0.7rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  color: transparent;
+  line-height: 1.6;
+}
+
 @import "./animations.css";

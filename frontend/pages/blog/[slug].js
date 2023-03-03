@@ -6,6 +6,7 @@ import { useRouter } from "next/router"
 import Breadcumb from "@components/Breadcumb"
 import useTimeout from "@hooks/useTimeout"
 import usePost from "@hooks/usePost"
+import LoadingState from "context/LoadingState"
 
 function Post({ post }) {
   const router = useRouter()
@@ -14,15 +15,17 @@ function Post({ post }) {
 
   useTimeout(() => visualize(), 3)
 
-  return <div className="flex flex-col mt-12">
-    <Breadcumb />
-    <Heading size="xl" className="mt-12">{post.title}</Heading>
-    <PostMeta
-      slug={slug}
-      date={new Date(post.publishedAt)}
-    />
-    <Markdown className="mt-10 fade-in">{post.text}</Markdown>
-  </div>
+  return <LoadingState>
+    {() => <div className="flex flex-col mt-12">
+      <Breadcumb />
+      <Heading size="xl" className="mt-12">{post.title}</Heading>
+      <PostMeta
+        slug={slug}
+        date={new Date(post.publishedAt)}
+      />
+      <Markdown className="mt-10 fade-in">{post.text}</Markdown>
+    </div>}
+  </LoadingState>
 }
 
 export async function getStaticPaths() {

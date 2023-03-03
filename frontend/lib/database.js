@@ -14,28 +14,27 @@ export const config = {
 const app = initializeApp(config)
 const firestore = getFirestore(app)
 
+async function getUserVisitorId() {
+  const fp = await FingerprintJS.load()
+  const { visitorId } = await fp.get()
+  return visitorId
+}
+
+const getVisitorId = getUserVisitorId()
+
 export const user = () => {
   const coll = process.env.NODE_ENV === 'development' ? 'users-dev' : 'users'
-
-  async function getUserVisitorId() {
-    const fp = await FingerprintJS.load()
-    const { visitorId } = await fp.get()
-    return visitorId
-  }
-
   return {
     set: {
       post: function(slug) {
         return {
           like: async function() {
-            const id = await getUserVisitorId()
-            return await setDoc(doc(firestore, coll, id), {
+            return await setDoc(doc(firestore, coll, await getVisitorId), {
               [slug]: { isLiked: true, updated: serverTimestamp() }
             }, { merge: true })
           },
           dislike: async function() {
-            const id = await getUserVisitorId()
-            return await setDoc(doc(firestore, coll, id), {
+            return await setDoc(doc(firestore, coll, await getVisitorId), {
               [slug]: { isLiked: false, updated: serverTimestamp() }
             }, { merge: true })
           }
@@ -46,8 +45,7 @@ export const user = () => {
       post: function(slug) {
         return {
           isLiked: async function() {
-            const id = await getUserVisitorId()
-            return await (await getDoc(doc(firestore, coll, id))).get(slug)
+            return (await getDoc(doc(firestore, coll, await getVisitorId))).get(slug)?.isLiked
           }
         }
       }
