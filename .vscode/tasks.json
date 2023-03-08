@@ -1,0 +1,44 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev:backend",
+      "type": "shell",
+      "command": "yarn workspace @blog/backend dev"
+    },
+    {
+      "label": "dev:frontend",
+      "type": "shell",
+      "command": "yarn workspace @blog/frontend dev"
+    },
+    {
+      "label": "dev",
+      "dependsOn": ["dev:backend", "dev:frontend"],
+      "dependsOrder": "parallel"
+    },
+    {
+      "label": "start:backend",
+      "type": "shell",
+      "dependsOn": ["build:backend"],
+      "command": "yarn workspace @blog/backend start"
+    },
+    {
+      "label": "start:frontend",
+      "type": "shell",
+      "dependsOn": ["build:frontend"],
+      "command": "yarn workspace @blog/frontend start"
+    },
+    {
+      "label": "build:frontend",
+      "type": "shell",
+      "command": "yarn workspace @blog/backend start & yarn workspace @blog/frontend build",
+    },
+    {
+      "label": "build:backend",
+      "type": "shell",
+      "command": "yarn workspace @blog/backend build"
+    }
+  ]
+}

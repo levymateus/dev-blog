@@ -1,32 +1,25 @@
 import { withErrorBoundary } from "react-error-boundary"
-import { QueryClient, dehydrate } from "react-query"
+import ErrorFallback from "@components/Error"
+import Markdown from "@components/Markdown"
+import Heading from "@components/Heading"
+import { fetchAPI } from "lib/api";
 
-import Markdown from "../components/Markdown"
-import ErrorFallback from "../components/Error"
-import Heading from "../components/Heading"
-import Text from "../components/Text"
-import { defaultOptions } from "./_app"
-
-function About({ about }) {
+function About({ text }) {
   return (
-    <main>
-      <Heading type="h1" id="about">About</Heading>
-      <Text type="p">{about?.attributes.description}</Text>
-      <Markdown text={about?.attributes.text} />
-      <br />
-    </main>
+    <div className="mt-10">
+      <Heading size="xl">About Me</Heading>
+      <Markdown className="mt-10 fade-in">{text}</Markdown>
+    </div>
   );
 }
 
 export async function getStaticProps() {
-  const queryClient = new QueryClient({ defaultOptions: defaultOptions })
-  const { data: about } = await queryClient.fetchQuery(['/about'])
+  const data = await fetchAPI("/about-me");
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
-      about: about,
-    },
-  }
+      text: data.data.attributes.text,
+    }
+  };
 }
 
 export default withErrorBoundary(About, { FallbackComponent: ErrorFallback })

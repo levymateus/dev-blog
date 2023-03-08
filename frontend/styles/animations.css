@@ -1,0 +1,105 @@
+.bounce-left {
+  animation: bounceLeft var(--duration, 0.35s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.bounce-right {
+  animation: bounceRight var(--duration, 0.35s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.bounce-top {
+  animation: bounceTop var(--duration, 0.35s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.bounce-bottom {
+  animation: bounceBottom var(--duration, 0.35s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.blur-in {
+  animation: blurIn var(--duration, 0.5s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.fade-in {
+  animation: fadeIn var(--duration, 0.35s) forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.dark .skeleton {
+  animation: skeleton-loading-dark 1s linear infinite alternate;
+}
+
+@keyframes bounceLeft {
+  from {
+    transform: translateX(var(--from, 0px))
+  }
+  to {
+    transform: translateX(var(--to, -100px))
+  }
+}
+
+@keyframes bounceRight {
+  from {
+    transform: translateX(var(--from, -100px))
+  }
+  to {
+    transform: translateX(var(--to, 0px))
+  }
+}
+
+@keyframes bounceTop {
+  from {
+    transform: translateY(0)
+  }
+  to {
+    transform: translateY(-80px)
+  }
+}
+
+@keyframes bounceBottom {
+  from {
+    transform: translateY(-80px)
+  }
+  to {
+    transform: translateY(0)
+  }
+}
+
+@keyframes blurIn {
+  from {
+    filter: blur(0px);
+  }
+  to {
+    filter: blur(4px);
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+@keyframes skeleton-loading-dark {
+  0% {
+    background-color: hsla(0, 0%, 20%, 0.8);
+  }
+  100% {
+    background-color: hsla(0, 0%, 26%, 0.95);
+  }
+}

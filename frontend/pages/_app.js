@@ -1,57 +1,46 @@
-import { QueryClient, Hydrate, QueryClientProvider } from "react-query"
-import { useState } from "react"
-import App from "next/app"
+import Head from "next/head"
+import NextApp from "next/app"
+
+import "@styles/globals.css"
 
 import { fetchAPI } from "../lib/api"
-import queryFn from "../utils/queryFn"
-import Head from "../components/Head"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import Layout from "../components/Layout"
-import GlobalContext from "../contexts/global-context"
-import useProgress from "../hooks/useProgress"
-import defaultGlobal from "../consts/global"
+import Layout from "@components/Layout"
+import useProgress from "@hooks/useProgress"
+import useEventListener from "@hooks/useEventListener"
+import { useRouter } from "next/router"
+import useTheme from "@hooks/useTheme"
+import RemoteConfig from "context/RemoteConfig"
 
-import "../styles/globals.scss"
-import "../styles/nprogress.scss"
+const App = ({ Component, pageProps }) => {
+  const router = useRouter()
 
-export const defaultOptions = {
-  queries: {
-    queryFn: queryFn
-  }
-}
-
-const MyApp = ({ Component, pageProps }) => {
-  const [queryClient] = useState(() => new QueryClient({ defaultOptions }))
-  const { global, contact } = pageProps
-
+  useTheme()
   useProgress()
 
+  useEventListener('keydown', () => {
+    if (!document.activeElement) {
+      window.focus()
+    }
+  })
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <GlobalContext.Provider value={global.data?.attributes || defaultGlobal}>
-        <Layout>
-          <Head />
-          <Header />
-          <Hydrate state={pageProps.dehydratedState}>
-            <Component {...pageProps} />
-          </Hydrate>
-          <Footer social={contact.data?.attributes?.social} />
-        </Layout>
-      </GlobalContext.Provider>
-    </QueryClientProvider>
+    <RemoteConfig>
+      <Layout>
+        <Head>
+          <title>{pageProps?.title || router.basePath}</title>
+        </Head>
+        <Component {...pageProps} />
+      </Layout>
+    </RemoteConfig>
   )
 }
 
-MyApp.getInitialProps = async (ctx) => {
-  const appProps = await App.getInitialProps(ctx)
-  const [global, contact] = await Promise.all([
-    fetchAPI("/global?populate=*"),
-    fetchAPI("/contact?populate=*")
-  ])
-  return { ...appProps, pageProps: { global, contact } }
+App.getInitialProps = async (ctx) => {
+  const appProps = await NextApp.getInitialProps(ctx);
+  const data = await fetchAPI("/global?populate=*");
+  return { ...appProps, pageProps: { ...data?.data?.attributes } }
 }
 
-MyApp.displayName = 'App'
+App.displayName = 'App'
 
-export default MyApp
+export default App

@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "code-js-theme.css";
+@import "ngprogress.css";
+
+.bg-rw-teal {
+  background: linear-gradient(91.17deg, #97EEE4 -1.09%, #14B8A6 36.12%, #0B9787 73.15%);
+}
+
+.bg-rw-indigo {
+  background: linear-gradient(91.17deg, #6C68D9 -1.09%, #4541AD 36.12%, #312E81 73.15%);
+}
+
+.bg-rw-purple {
+  background: linear-gradient(91.17deg, #9258BF -1.09%, #7F3AB5 36.12%, #581C87 73.15%);
+}
+
+.dark .bg-rw-rw {
+  background: linear-gradient(95.15deg, #0B9788 -7%, #33325E 51.62%, #581C87 107.85%);
+}
+
+.markdown h1, h2, h3, h4, h5, h6, p, em, strong, a {
+  color: black;
+}
+
+.dark .markdown {
+  color: white;
+}
+
+.dark .markdown h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark p,
+.dark em,
+.dark strong {
+  color: white;
+}
+
+.skeleton-text {
+  width: 75%;
+  height: 0.7rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  color: transparent;
+  line-height: 1.6;
+}
+
+@import "./animations.css";

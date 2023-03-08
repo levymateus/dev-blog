@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect'
+import useIsomorphicLayoutEffect from '@hooks/useIsomorphicLayoutEffect'
 
 function useLockedBody(initialLocked = false) {
   const [locked, setLocked] = useState(initialLocked)
@@ -35,7 +35,7 @@ function useLockedBody(initialLocked = false) {
     if (locked !== initialLocked) {
       setLocked(initialLocked)
     }
-  }, [initialLocked])
+  }, [initialLocked, setLocked, locked])
 
   return [locked, setLocked]
 }

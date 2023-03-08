@@ -14,33 +14,21 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "default": "Blog title"
+      "required": false
     },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "footnote": {
-      "type": "richtext",
-      "default": "Developed by &nbsp; [levymateus//{\"target\":\"_blank\"}](https://github.com/levymateus)",
+    "blog": {
+      "type": "text",
       "required": true
     },
-    "favicon": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+    "bio": {
+      "type": "component",
+      "repeatable": false,
+      "component": "info.bio"
     },
-    "description": {
-      "type": "string",
-      "maxLength": 128
+    "footer": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.social"
     }
   }
 }
