@@ -7,8 +7,11 @@ import If from "@components/If"
 import Link from "next/link"
 import { ArrowRight } from "react-feather"
 import { fetchAPI } from "../lib/api"
+import useConfig from "@hooks/useConfig"
 
 const HomePage = ({ bio, posts }) => {
+  const { config } = useConfig()
+
   return <div className="fade-in">
     <section className="flex pt-10 flex-col sm:flex-row">
       <If stmt={bio.avatar}>
@@ -60,9 +63,11 @@ const HomePage = ({ bio, posts }) => {
         </Link>
       </section>
     </If>
-    <section id="contact" className="pt-14">
-      <Card />
-    </section>
+    <If stmt={config?.contact}>
+      <section id="contact" className="pt-14">
+        <Card />
+      </section>
+    </If>
   </div>
 };
 
@@ -76,7 +81,7 @@ export async function getStaticProps() {
     props: {
       ...global?.data?.attributes,
       posts: posts?.data,
-      bio: bio.data.attributes.bio
+      bio: bio.data.attributes.bio,
     }
   }
 }

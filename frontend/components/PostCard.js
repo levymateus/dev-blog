@@ -7,23 +7,19 @@ import LoadingState from "context/LoadingState"
 
 function PostCard({ slug, description, color = 'teal' }) {
   return <LoadingState>
-    {({ isLoading }) => <div className={clsx("rounded p-0.5", {
+    {({ isLoading }) => <Link href={`/blog/${slug}`} className={clsx("rounded p-0.5", {
       "bg-rw-teal": color === 'teal',
       "bg-rw-indigo": color === 'indigo',
       "bg-rw-purple": color === 'purple'
-    })}>
+    })} passHref>
       <div className="rounded bg-white dark:bg-black p-6">
-        <Link href={`/blog/${slug}`} className={clsx({
-          "select-none hover:cursor-default pointer-events-none": isLoading
-        })} passHref>
-          <Text size="xl" isLoading={isLoading}>{description}</Text>
-        </Link>
-        <div className="flex flex-row mt-6 sm:mt-24 space-x-3 text-black dark:text-white text-clip">
+        <Text size="xl" isLoading={isLoading}>{description}</Text>
+        <div className="flex flex-row mt-6 sm:mt-24 space-x-3 text-black dark:text-white text-clip" onClick={(evt) => evt.preventDefault()}>
           <Views slug={slug} size="sm" />
           <Likes slug={slug} size="sm" defaultValue={1} />
         </div>
       </div>
-    </div>}
+    </Link>}
   </LoadingState>
 }
 

@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { GitHub, Twitter } from "react-feather"
 import Text from "@components/Text"
+import If from "@components/If"
+import useConfig from "@hooks/useConfig"
 
 function NavLink({ href, children, ...props }) {
   return <li className="my-2">
@@ -11,12 +13,15 @@ function NavLink({ href, children, ...props }) {
 }
 
 function Footer() {
+  const { config } = useConfig()
   return <>
     <div className="grid sm:grid-cols-3 border-t border-black dark:border-neutral-500 pt-6">
       <ul className="flex flex-col">
         <NavLink href="/">Home</NavLink>
         <NavLink href="/about">About</NavLink>
-        <NavLink href="/#contact">Contact</NavLink>
+        <If stmt={config?.contact}>
+          <NavLink href="/#contact">Contact</NavLink>
+        </If>
       </ul>
       <ul className="flex flex-col">
         <NavLink href="/snippets">Snippets</NavLink>

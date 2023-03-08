@@ -9,6 +9,7 @@ import useProgress from "@hooks/useProgress"
 import useEventListener from "@hooks/useEventListener"
 import { useRouter } from "next/router"
 import useTheme from "@hooks/useTheme"
+import RemoteConfig from "context/RemoteConfig"
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -23,12 +24,14 @@ const App = ({ Component, pageProps }) => {
   })
 
   return (
-    <Layout>
-      <Head>
-        <title>{pageProps?.title || router.basePath}</title>
-      </Head>
-      <Component {...pageProps} />
-    </Layout>
+    <RemoteConfig>
+      <Layout>
+        <Head>
+          <title>{pageProps?.title || router.basePath}</title>
+        </Head>
+        <Component {...pageProps} />
+      </Layout>
+    </RemoteConfig>
   )
 }
 

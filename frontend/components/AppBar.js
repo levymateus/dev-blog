@@ -9,6 +9,7 @@ import useStore from "@hooks/useStore"
 import If from "@components/If"
 import clsx from "clsx"
 import { useState } from "react"
+import useConfig from "@hooks/useConfig"
 
 function HamburgerMenu({ onToggleMenu }) {
   const [sidebarIsOpen, setSidebarOpen] = useStore(({ sidebarIsOpen, setSidebarOpen }) => [sidebarIsOpen, setSidebarOpen])
@@ -56,6 +57,7 @@ function ThemeToggle() {
 function AppBar({ onToggleMenu }) {
   const [appBarState, setAppBarState] = useState('')
   const [isAltKeyPressed, setAltKeyIsPressed] = useState(false)
+  const { config } = useConfig()
 
   useScroll('on-scroll-down', () => {
     setAppBarState('bounce-top')
@@ -93,9 +95,11 @@ function AppBar({ onToggleMenu }) {
           <NavLink accessKey="s" href="/snippets">
             {isAltKeyPressed ? <><span className="underline underline-offset-4">S</span>nnipets</> : 'Snnipets'}
           </NavLink>
-          <NavLink accessKey="c" href="/#contact">
-            {isAltKeyPressed ? <><span className="underline underline-offset-4">C</span>ontact</> : 'Contact'}
-          </NavLink>
+          <If stmt={config.contact}>
+            <NavLink accessKey="c" href="/#contact">
+              {isAltKeyPressed ? <><span className="underline underline-offset-4">C</span>ontact</> : 'Contact'}
+            </NavLink>
+          </If>
           <NavLink accessKey="u" href="/about">
             {isAltKeyPressed ? <>Abo<span className="underline underline-offset-4">u</span>t</> : 'About'}
           </NavLink>

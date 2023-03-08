@@ -6,6 +6,7 @@ import useList from "@hooks/useList"
 import max from "@utils/max"
 import clsx from "clsx"
 import useEventListener from "@hooks/useEventListener"
+import useConfig from "@hooks/useConfig"
 
 const items = [
   { href: '/', name: 'Home', duration: 0.4 },
@@ -17,9 +18,10 @@ const items = [
 
 function Sidebar({ onSelectItem }) {
   const ref = useRef()
-  const [list, { forEach }] = useList(items)
+  const [list, { forEach, filter }] = useList(items)
   const [isOpen, setOpen] = useStore(({ sidebarIsOpen, setSidebarOpen }) => [sidebarIsOpen, setSidebarOpen])
   const [isVisible, setVisible] = useState(false)
+  const { config } = useConfig()
   const animation = isOpen ? "bounce-right" : "bounce-left"
 
   function rearrange(pivot) {
@@ -36,7 +38,10 @@ function Sidebar({ onSelectItem }) {
 
   useEffect(() => {
     if (isOpen) setVisible(true)
-  }, [isOpen])
+    if (!config?.contact) {
+      filter(({ name }) => name.toLowerCase() !== 'contact')
+    }
+  }, [config?.contact, filter, isOpen])
 
   useEventListener('scroll', () => {
     if (isOpen) {

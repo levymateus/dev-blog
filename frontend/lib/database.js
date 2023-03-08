@@ -1,6 +1,8 @@
-import { FirebaseError, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
-import { doc, getDoc, getFirestore, updateDoc, increment, setDoc, arrayUnion, serverTimestamp } from "firebase/firestore"
+import { doc, getDoc, getFirestore, updateDoc, increment, setDoc, serverTimestamp } from "firebase/firestore"
+import { getDatabase, ref, set, onValue } from "firebase/database"
+import isDev from "@utils/isDev";
 
 export const config = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -13,17 +15,44 @@ export const config = {
 
 const app = initializeApp(config)
 const firestore = getFirestore(app)
+const db = getDatabase(app)
 
-async function getUserVisitorId() {
-  const fp = await FingerprintJS.load()
-  const { visitorId } = await fp.get()
-  return visitorId
+export const database = () => {
+  return {
+    getPosts: async function() {
+      return new Promise((resolve, reject) => {
+        const path = isDev ? 'blog-dev/posts/' : 'blog/posts/'
+        const blogRef = ref(db,  path);
+        onValue(blogRef, (snapshot) => {
+          let data = snapshot.val()
+          if (data) {
+            data = Object.entries(data).map(([key, props]) => {
+              return {
+                slug: key,
+                ...props
+              }
+            })
+            resolve(data)
+          }
+          reject()
+        });
+      })
+    },
+    addPost: async function(slug, data) {
+      const path  = isDev ? 'blog-dev/posts/' : 'blog/posts/'
+      return await set(ref(db, path + slug), data);
+    },
+  }
 }
-
-const getVisitorId = getUserVisitorId()
 
 export const user = () => {
   const coll = process.env.NODE_ENV === 'development' ? 'users-dev' : 'users'
+  async function getUserVisitorId() {
+    const fp = await FingerprintJS.load()
+    const { visitorId } = await fp.get()
+    return visitorId
+  }
+  const getVisitorId = getUserVisitorId()
   return {
     set: {
       post: function(slug) {

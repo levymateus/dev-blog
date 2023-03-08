@@ -18,14 +18,14 @@ function Text({
     'text-xl': size === 'xl' // 16px
   }
   const textColor = {
-    "text-black dark:text-white": variant === 'default' && !isLoading,
-    "text-neutral-500 dark:text-gray-500": variant === 'neutral'
+    "text-black dark:text-white": !isLoading && variant === 'default',
+    "text-neutral-500 dark:text-gray-500": !isLoading && variant === 'neutral'
   }
   const skeleton = {
-    "skeleton skeleton-text select-none hover:cursor-default pointer-events-none": isLoading,
+    "skeleton skeleton-text select-none hover:cursor-default pointer-events-none text-transparent": isLoading,
   }
 
-  return <Text className={clsx(textColor, textSize, skeleton, className)}>{children}</Text>
+  return <Text className={clsx(skeleton, textColor, textSize, className)}>{children}</Text>
 }
 
 export default Text

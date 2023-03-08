@@ -16,16 +16,14 @@ export default function Post({
   return <LoadingState>
     {({ isLoading }) => <div className="flex flex-col space-y-3">
       <Link href={`blog/${slug}`} className={clsx("w-fit", {
-        "skeleton select-none hover:cursor-default pointer-events-none": isLoading,
+        "select-none hover:cursor-default pointer-events-none text-transparent": isLoading,
       })} passHref>
-        <Heading isLoading={isLoading}>{title}</Heading>
-      </Link>
-      <Link href={`blog/${slug}`} passHref className={clsx("w-fit", {
-        "skeleton select-none hover:cursor-default pointer-events-none": isLoading,
-      })}>
-        <Text isLoading={isLoading} className="text-gray-700 dark:text-gray-500">
-          {shortText}
-        </Text>
+        <div className="flex flex-col space-y-3">
+          <Heading isLoading={isLoading}>{title}</Heading>
+          <Text isLoading={isLoading}>
+            {shortText}
+          </Text>
+        </div>
       </Link>
       <div className="flex flex-row">
         <DateText isLoading={isLoading} date={date} />
