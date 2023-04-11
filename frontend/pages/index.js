@@ -15,11 +15,7 @@ const HomePage = ({ bio, posts }) => {
   return <div className="fade-in">
     <section className="flex pt-10 flex-col sm:flex-row">
       <If stmt={bio.avatar}>
-        <Avatar
-          className="order-1 sm:order-2"
-          src={bio.avatar.data.attributes.url}
-          alt={bio.avatar.data.attributes.alternativeText}
-        />
+        <Avatar className="order-1 sm:order-2" />
       </If>
       <div className="flex-1 mt-8 sm:mt-0 flex-col order-2 sm:order-1">
         <Heading size="xl" asChild>

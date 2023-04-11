@@ -10,7 +10,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  images: { domains: [AWS_S3] },
+  images: { domains: [AWS_S3, "firebasestorage.googleapis.com"] },
   reactStrictMode: true,
 }
 
